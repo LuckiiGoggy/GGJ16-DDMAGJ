@@ -10,8 +10,6 @@ public class Player : MonoBehaviour {
     public float m_MovementSpeed;
     private GameObject m_Sacrifice;
 
-    public bool m_IsHoldingSacrifice;
-
     public KeyCode m_DropSacrifice;
 
     #region Player States
@@ -98,26 +96,23 @@ public class Player : MonoBehaviour {
 
 	public void DropSacrifice(Vector3 away)
     {
-        if (m_IsHoldingSacrifice)
+		if (m_Sacrifice != null)
         {
             print("drop sacrafice");
-			m_Sacrifice.SetActive (false);
+			m_Sacrifice.SetActive (true);
 			m_Sacrifice.transform.position = transform.position;
-			m_Sacrifice.transform.Translate (away);
+			m_Sacrifice.transform.Translate (away * 2);
 			m_Sacrifice.GetComponent<Sacrifice> ().SetOwner (null);
 			m_Sacrifice = null;
-
-            Instantiate(m_Sacrifice);
-            // Instantiate (sacrifice, transform.position, Quaternion.identity);
         }
     }
 
     public void PlaceSacrifice()
     {
-        if (m_IsHoldingSacrifice)
+		if (m_Sacrifice)
         {
             print("place sacrafice in box");
-			m_IsHoldingSacrifice = false;
+			m_Sacrifice = null;
 
 			Instantiate (m_Sacrifice);
         }
@@ -192,7 +187,8 @@ public class Player : MonoBehaviour {
         {
             if (weapon.m_IsAttacking)
             {
-				if (m_IsHoldingSacrifice) {
+				print (string.Format("weapon {0} hit player {1}", coll.name, name));
+				if (m_Sacrifice != null) {
 					m_StunTimer = weapon.m_StunLength;
 					DropSacrifice (transform.position - coll.transform.position);
 				} else {
