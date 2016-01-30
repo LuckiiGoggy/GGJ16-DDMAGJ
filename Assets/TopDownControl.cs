@@ -2,11 +2,12 @@
 using System.Collections;
 
 public class TopDownControl : MonoBehaviour {
-
+	
     public KeyCode m_Up;
     public KeyCode m_Down;
     public KeyCode m_Left;
     public KeyCode m_Right;
+	public KeyCode m_Drop;
 
     public KeyCode m_Attack;
 
@@ -25,9 +26,8 @@ public class TopDownControl : MonoBehaviour {
         if (Input.GetKey(m_Down)) Move(Vector3.down * m_MovementSpeed);
         if (Input.GetKey(m_Left)) Move(Vector3.left * m_MovementSpeed);
         if (Input.GetKey(m_Right)) Move(Vector3.right * m_MovementSpeed);
-
+		if (Input.GetKey (m_Drop)) GetComponent<Player> ().DropSacrafice();
         if (Input.GetKeyDown(m_Attack)) GetComponentInChildren<Weapon>().Attack();
-	
 	}
 
     void Move(Vector3 moveVec)
