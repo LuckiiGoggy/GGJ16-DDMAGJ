@@ -14,9 +14,13 @@ public class Player : MonoBehaviour {
 
     #region Player States
 
-    private bool m_IsInvulnerable;
-    private bool m_IsInGodMode;
+    public bool m_IsInvulnerable;
+    public bool m_IsInGodMode;
 
+    #endregion
+
+    #region Animation Variables
+    public float m_TransformationLength;
     #endregion
 
     #region Debuffs
@@ -132,7 +136,7 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-        // PlayerMovement control = gameObject.GetComponent<PlayerMovement>();
+        PlayerMovement control = gameObject.GetComponent<PlayerMovement>();
 
         foreach (Debuffs debuff in m_DebuffTimers.Keys.ToList()) 
             m_DebuffTimers[debuff] = Mathf.Max(m_DebuffTimers[debuff] - Time.fixedDeltaTime, 0);
@@ -144,7 +148,7 @@ public class Player : MonoBehaviour {
             m_DebuffTimers[Debuffs.Slow] == 0 &&
             m_DebuffTimers[Debuffs.Stun] == 0)
         {
-            // control._fMoveSpeed = m_MovementSpeed;
+            control._fMoveSpeed = m_MovementSpeed;
         }
 
         if (m_PowerStateTimers[PowerStates.Invulnerability] == 0) m_IsInvulnerable = false;
@@ -158,7 +162,16 @@ public class Player : MonoBehaviour {
 
         #endregion
 
+        CheckStates();
+
         HandleKeys();
+    }
+
+    private void CheckStates()
+    {
+        if (m_IsInGodMode)
+        {
+        }
     }
 
     void HandleKeys()
@@ -208,6 +221,19 @@ public class Player : MonoBehaviour {
 		}
 	}
 
-    public void GodModeOn() { m_IsInGodMode = true; }
-    public void GodModeOff() { m_IsInGodMode = false; }
+    public void GodModeOn() { 
+        m_IsInGodMode = true;
+
+        //Change Sprite
+        //Activate Animation
+        ApplyDebuff(Debuffs.Stun, 42f, m_TransformationLength);
+    }
+    public void GodModeOff()
+    {
+        m_IsInGodMode = false;
+
+        //Change Sprite
+        //Activate Animation
+        ApplyDebuff(Debuffs.Stun, 42f, m_TransformationLength);
+    }
 }
