@@ -8,9 +8,11 @@ public class Player : MonoBehaviour {
     public float m_SlowTimer;
 
     public float m_MovementSpeed;
-    public GameObject sacrifice;
+    public GameObject m_Sacrifice;
 
-    private bool mIsHoldingSacrafice;
+    public bool m_IsHoldingSacrifice;
+
+    public KeyCode m_DropSacrifice;
 
     #region Player States
 
@@ -90,29 +92,29 @@ public class Player : MonoBehaviour {
     {
 		print("pick up sacrafice");
 		Destroy (sacrafice);
-        mIsHoldingSacrafice = true;
+        m_IsHoldingSacrifice = true;
     }
 
     public void DropSacrifice()
     {
-        if (mIsHoldingSacrafice)
+        if (m_IsHoldingSacrifice)
         {
             print("drop sacrafice");
-            mIsHoldingSacrafice = false;
+            m_IsHoldingSacrifice = false;
 
-            Instantiate(sacrifice);
+            Instantiate(m_Sacrifice);
             // Instantiate (sacrifice, transform.position, Quaternion.identity);
         }
     }
 
     public void PlaceSacrifice()
     {
-        if (mIsHoldingSacrafice)
+        if (m_IsHoldingSacrifice)
         {
             print("place sacrafice in box");
-			mIsHoldingSacrafice = false;
+			m_IsHoldingSacrifice = false;
 
-			Instantiate (sacrifice);
+			Instantiate (m_Sacrifice);
         }
     }
 	// Use this for initialization
@@ -153,7 +155,18 @@ public class Player : MonoBehaviour {
         m_PowerStateTimersKeys = m_PowerStateTimers.Keys.ToList();
         m_PowerStateTimersValues = m_PowerStateTimers.Values.ToList();
 
+        #endregion
+
+        HandleKeys();
+    }
+
+    void HandleKeys()
+    {
+
+
+        #region Debug Keys
         if (Input.GetKeyDown(m_ForceSlow)) ApplyDebuff(Debuffs.Slow, 0.5f, 5);
+        if (Input.GetKeyDown(m_DropSacrifice)) DropSacrifice();
         #endregion
     }
 
@@ -172,7 +185,7 @@ public class Player : MonoBehaviour {
         {
             if (weapon.m_IsAttacking)
             {
-				if (mIsHoldingSacrafice) {
+				if (m_IsHoldingSacrifice) {
 					m_StunTimer = weapon.m_StunLength;
 					DropSacrifice ();
 				} else {
