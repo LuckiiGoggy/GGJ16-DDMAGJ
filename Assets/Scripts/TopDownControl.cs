@@ -26,7 +26,7 @@ public class TopDownControl : MonoBehaviour {
         if (Input.GetKey(m_Down)) Move(Vector3.down * m_MovementSpeed);
         if (Input.GetKey(m_Left)) Move(Vector3.left * m_MovementSpeed);
         if (Input.GetKey(m_Right)) Move(Vector3.right * m_MovementSpeed);
-		if (Input.GetKey (m_Drop)) GetComponent<Player> ().DropSacrafice();
+		if (Input.GetKey (m_Drop)) GetComponent<Player> ().DropSacrifice();
         if (Input.GetKeyDown(m_Attack)) GetComponentInChildren<Weapon>().Attack();
 	}
 
