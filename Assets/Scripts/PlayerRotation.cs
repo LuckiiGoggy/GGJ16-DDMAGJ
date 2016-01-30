@@ -10,8 +10,9 @@ public class PlayerRotation : MonoBehaviour {
 
 	void Update ()
 	{
-		float angle = Mathf.Atan2 (-Input.GetAxis (_horizontalAxis), Input.GetAxis (_verticalAxis)) * Mathf.Rad2Deg;
-
-		transform.rotation = Quaternion.Euler (0, 0, angle);
+		if (Input.GetAxis (_horizontalAxis) != 0 || Input.GetAxis (_verticalAxis) != 0) {
+			float angle = Mathf.Atan2 (-Input.GetAxis (_horizontalAxis), Input.GetAxis (_verticalAxis)) * Mathf.Rad2Deg;
+			transform.rotation = Quaternion.Euler (0, 0, angle);
+		}
 	}
 }
