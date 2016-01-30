@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 public class Player : MonoBehaviour {
     public float m_StunTimer;
@@ -23,10 +24,16 @@ public class Player : MonoBehaviour {
 
     public Dictionary<Debuffs, float> m_DebuffTimers;
 
-
+    public KeyCode m_ForceSlow;
     #endregion
 
+    #region Debug
+    public List<Debuffs> m_DebuffTimersKeys;
+    public List<float> m_DebuffTimersValues;
+    public List<PowerStates> m_PowerStateTimersKeys;
+    public List<float> m_PowerStateTimersValues;
 
+    #endregion
 
     #region Power States
 
@@ -110,16 +117,23 @@ public class Player : MonoBehaviour {
     }
 	// Use this for initialization
 	void Start () {
-		
+        m_DebuffTimers = new Dictionary<Debuffs, float>();
+        m_PowerStateTimers = new Dictionary<PowerStates, float>();
+
+        m_DebuffTimers.Add(Debuffs.Slow, 0);
+        m_DebuffTimers.Add(Debuffs.Stun, 0);
+
+        m_PowerStateTimers.Add(PowerStates.Invulnerability, 0);
+        m_PowerStateTimers.Add(PowerStates.SuperSpeed, 0);
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
         PlayerMovement control = gameObject.GetComponent<PlayerMovement>();
 
-        foreach (Debuffs debuff in m_DebuffTimers.Keys) 
+        foreach (Debuffs debuff in m_DebuffTimers.Keys.ToList()) 
             m_DebuffTimers[debuff] = Mathf.Max(m_DebuffTimers[debuff] - Time.fixedDeltaTime, 0);
-        foreach (PowerStates powerState in m_PowerStateTimers.Keys) 
+        foreach (PowerStates powerState in m_PowerStateTimers.Keys.ToList()) 
             m_PowerStateTimers[powerState] = Mathf.Max(m_PowerStateTimers[powerState] - Time.fixedDeltaTime, 0);
         
 
@@ -131,7 +145,17 @@ public class Player : MonoBehaviour {
         }
 
         if (m_PowerStateTimers[PowerStates.Invulnerability] == 0) m_IsInvulnerable = false;
-	}
+
+        #region Debug Updates
+        m_DebuffTimersKeys = m_DebuffTimers.Keys.ToList();
+        m_DebuffTimersValues = m_DebuffTimers.Values.ToList();
+
+        m_PowerStateTimersKeys = m_PowerStateTimers.Keys.ToList();
+        m_PowerStateTimersValues = m_PowerStateTimers.Values.ToList();
+
+        if (Input.GetKeyDown(m_ForceSlow)) ApplyDebuff(Debuffs.Slow, 0.5f, 5);
+        #endregion
+    }
 
     /// <summary>
     /// When the Player Collides with a weapon, it should:
@@ -148,6 +172,7 @@ public class Player : MonoBehaviour {
         {
             if (weapon.m_IsAttacking)
             {
+                
                 m_SlowTimer = weapon.m_SlowLength;
             }
         }
