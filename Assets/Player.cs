@@ -69,7 +69,7 @@ public class Player : MonoBehaviour {
         {
             if (weapon.m_IsAttacking)
             {
-                m_StunTimer = weapon.m_StunLength;
+                m_SlowTimer = weapon.m_SlowLength;
             }
         }
     }
