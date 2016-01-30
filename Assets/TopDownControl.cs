@@ -39,9 +39,4 @@ public class TopDownControl : MonoBehaviour {
 
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
-
-    public void OnCollisionEnter2D(Collision2D coll) {
-        if (coll.gameObject.tag == "Enemy")
-            coll.gameObject.SendMessage("ApplyDamage", 10);
-    }
 }

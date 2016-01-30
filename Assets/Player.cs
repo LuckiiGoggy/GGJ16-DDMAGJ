@@ -6,12 +6,13 @@ public class Player : MonoBehaviour {
 
 	private bool mIsHoldingSacrafice;
 
-	public void PickUpSacrafice() {
+	public void PickUpSacrifice(GameObject sacrafice) {
 		print ("pick up sacrafice");
+		Destroy (sacrafice);
 		mIsHoldingSacrafice = true;
 	}
 
-	public void DropSacrafice() {
+	public void DropSacrifice() {
 		if (mIsHoldingSacrafice) {
 			print ("drop sacrafice");
 			mIsHoldingSacrafice = false;
@@ -21,9 +22,12 @@ public class Player : MonoBehaviour {
 		}
 	}
 
-	public void PlaceSacrafice() {
+	public void PlaceSacrifice() {
 		if (mIsHoldingSacrafice) {
 			print ("place sacrafice in box");
+			mIsHoldingSacrafice = false;
+
+			Instantiate (sacrifice);
 		}
 	}
 
@@ -63,14 +67,18 @@ public class Player : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-        var weapon = coll.transform.GetComponent<Weapon>();
+		print ("player collides with something");
+		if (coll.gameObject.tag == "Weapon") {
+			var weapon = coll.transform.GetComponent<Weapon> ();
 
-        if(weapon != null && weapon != GetComponentInChildren<Weapon>())
-        {
-            if (weapon.m_IsAttacking)
-            {
-                m_StunTimer = weapon.m_StunLength;
-            }
-        }
+			if (weapon != null && weapon != GetComponentInChildren<Weapon> ()) {
+				if (weapon.m_IsAttacking) {
+					m_StunTimer = weapon.m_StunLength;
+				}
+			}
+		} else if (coll.gameObject.tag == "Sacrifice") {
+			print ("Player collides Sacrifice");
+			PickUpSacrafice (coll.gameObject);
+		}
     }
 }
