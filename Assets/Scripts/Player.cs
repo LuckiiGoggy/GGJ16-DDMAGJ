@@ -8,7 +8,7 @@ public class Player : MonoBehaviour {
     public float m_SlowTimer;
 
     public float m_MovementSpeed;
-    public GameObject m_Sacrifice;
+    private GameObject m_Sacrifice;
 
     public bool m_IsHoldingSacrifice;
 
@@ -88,19 +88,24 @@ public class Player : MonoBehaviour {
     }
 
 
-	public void PickUpSacrifice(GameObject sacrafice)
+	public void PickUpSacrifice(GameObject sacrifice)
     {
 		print("pick up sacrafice");
-		Destroy (sacrafice);
-        m_IsHoldingSacrifice = true;
+		sacrifice.SetActive (false);
+		sacrifice.GetComponent<Sacrifice> ().SetOwner (gameObject);
+		m_Sacrifice = sacrifice;
     }
 
-    public void DropSacrifice()
+	public void DropSacrifice(Vector3 away)
     {
         if (m_IsHoldingSacrifice)
         {
             print("drop sacrafice");
-            m_IsHoldingSacrifice = false;
+			m_Sacrifice.SetActive (false);
+			m_Sacrifice.transform.position = transform.position;
+			m_Sacrifice.transform.Translate (away);
+			m_Sacrifice.GetComponent<Sacrifice> ().SetOwner (null);
+			m_Sacrifice = null;
 
             Instantiate(m_Sacrifice);
             // Instantiate (sacrifice, transform.position, Quaternion.identity);
@@ -166,7 +171,9 @@ public class Player : MonoBehaviour {
 
         #region Debug Keys
         if (Input.GetKeyDown(m_ForceSlow)) ApplyDebuff(Debuffs.Slow, 0.5f, 5);
-        if (Input.GetKeyDown(m_DropSacrifice)) DropSacrifice();
+		if (Input.GetKeyDown(m_DropSacrifice)) {
+			DropSacrifice(new Vector3(10, 10, 0));
+		}
         #endregion
     }
 
@@ -179,7 +186,7 @@ public class Player : MonoBehaviour {
     /// <param name="coll">The object that collided with the Player</param>
     void OnTriggerEnter2D(Collider2D coll)
     {
-        var weapon = coll.transform.GetComponent<Weapon>();
+        var weapon = coll.gameObject.GetComponent<Weapon>();
 
         if(weapon != null && weapon != GetComponentInChildren<Weapon>())
         {
@@ -187,7 +194,7 @@ public class Player : MonoBehaviour {
             {
 				if (m_IsHoldingSacrifice) {
 					m_StunTimer = weapon.m_StunLength;
-					DropSacrifice ();
+					DropSacrifice (transform.position - coll.transform.position);
 				} else {
 					m_SlowTimer = weapon.m_SlowLength;
 				}
@@ -197,7 +204,7 @@ public class Player : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D coll)
 	{
-		print ("player collides with something");
+		print ("player collides with something: " + coll.gameObject.tag);
 		if (coll.gameObject.tag == "Sacrifice" && m_StunTimer <= 0) {
 			print ("Player collides Sacrifice");
 			PickUpSacrifice (coll.gameObject);

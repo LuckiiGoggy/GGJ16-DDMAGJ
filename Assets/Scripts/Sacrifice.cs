@@ -3,13 +3,9 @@ using System.Collections;
 
 public class Sacrifice : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
+	private GameObject mOwner;
 
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+	public void SetOwner(GameObject owner) {
+		mOwner = owner;
 	}
 }
