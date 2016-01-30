@@ -6,22 +6,23 @@ public class Base : MonoBehaviour {
     public int m_RequiredSacrifices;
     private int m_CurrentSacrificeCount;
 
-	public GameObject Player;
+	public string m_OwnerName;
+	private GameObject m_Owner;
 
     public void Start()
     {
-		
+		m_Owner = GameObject.Find (m_OwnerName);
     }
 
     public void FixedUpdate()
     {
         if(m_CurrentSacrificeCount >= m_RequiredSacrifices)
         {
-			Player.GetComponent<Player>().GodModeOn();
+			m_Owner.GetComponent<Player>().GodModeOn();
         }
         else
         {
-			Player.GetComponent<Player>().GodModeOff();
+			m_Owner.GetComponent<Player>().GodModeOff();
         }
     }
 
@@ -33,9 +34,9 @@ public class Base : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D coll)
 	{
 		print ("base triggers with something: " + coll.gameObject.tag);
-		if (coll.gameObject == Player) {
+		if (coll.gameObject == m_Owner) {
 			print ("Player triggers base");
-			Player.GetComponent<Player> ().PlaceSacrifice();
+			coll.gameObject.GetComponent<Player> ().PlaceSacrifice();
 			AddSacrifice ();
 		}
 	}
