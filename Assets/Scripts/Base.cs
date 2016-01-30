@@ -26,18 +26,22 @@ public class Base : MonoBehaviour {
         }
     }
 
-    public void AddSacrifice()
+	public void AddSacrifice(GameObject sacrifice)
     {
         m_CurrentSacrificeCount += m_RequiredSacrifices;
+		sacrifice.GetComponent<Sacrifice> ().Respawn ();
+		Destroy (sacrifice);
+
     }
 
 	void OnTriggerEnter2D(Collider2D coll)
 	{
 		print ("base triggers with something: " + coll.gameObject.tag);
-		if (coll.gameObject == m_Owner) {
-			print ("Player triggers base");
-			coll.gameObject.GetComponent<Player> ().PlaceSacrifice();
-			AddSacrifice ();
+
+		if (coll.gameObject.tag == "Sacrifice") {
+			print ("Sacrifice triggers base");
+			AddSacrifice (coll.gameObject);
 		}
+
 	}
 }
