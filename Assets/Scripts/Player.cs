@@ -138,7 +138,7 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-        PlayerMovement control = gameObject.GetComponent<PlayerMovement>();
+        //PlayerMovement control = gameObject.GetComponent<PlayerMovement>();
 
         foreach (Debuffs debuff in m_DebuffTimers.Keys.ToList()) 
             m_DebuffTimers[debuff] = Mathf.Max(m_DebuffTimers[debuff] - Time.fixedDeltaTime, 0);
@@ -150,7 +150,7 @@ public class Player : MonoBehaviour {
             m_DebuffTimers[Debuffs.Slow] == 0 &&
             m_DebuffTimers[Debuffs.Stun] == 0)
         {
-            control._fMoveSpeed = m_MovementSpeed;
+            //control._fMoveSpeed = m_MovementSpeed;
         }
 
         if (m_PowerStateTimers[PowerStates.Invulnerability] == 0) m_IsInvulnerable = false;

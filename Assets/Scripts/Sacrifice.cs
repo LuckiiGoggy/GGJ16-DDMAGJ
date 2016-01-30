@@ -9,7 +9,7 @@ public class Sacrifice : MonoBehaviour {
 
 	public void Respawn() {
 
-        Instantiate(gameObject);
+		Instantiate(gameObject, Vector3.zero, Quaternion.identity);
         int randomNumber = Random.Range(0, 2);
         switch (randomNumber) {
             case 0:
