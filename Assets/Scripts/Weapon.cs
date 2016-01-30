@@ -12,6 +12,8 @@ public class Weapon : MonoBehaviour {
     public float m_StunLength;
     public float m_SlowLength;
 
+    public bool m_IsGodWeapon;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -37,6 +39,20 @@ public class Weapon : MonoBehaviour {
             }
         }
 	}
+
+    public void SetGodWeapon()
+    {
+        m_IsGodWeapon = true;
+    }
+    public void ReverseGodWeapon()
+    {
+        m_IsGodWeapon = false;
+    }
+
+    public bool IsGodWeapon()
+    {
+        return m_IsGodWeapon;
+    }
 
     public void Attack()
     {

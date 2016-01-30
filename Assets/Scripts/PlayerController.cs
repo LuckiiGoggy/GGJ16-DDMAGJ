@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour {
 	private PlayerMovement _playerMovement_ref;
 	private PlayerRotation _playerRotation_ref;
 
+    private Player m_Player;
+
 	void Awake ()
 	{
 		// first get the playermovement and playerrotation on THIS script's gameobject
@@ -28,5 +30,8 @@ public class PlayerController : MonoBehaviour {
 		// [playerrotation]
 		_playerRotation_ref._horizontalAxis = InputControllerManager._horizontalAxis;
 		_playerRotation_ref._verticalAxis = InputControllerManager._verticalAxis;
-	}
+	
+        
+
+    }
 }
