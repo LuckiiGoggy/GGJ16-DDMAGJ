@@ -11,6 +11,7 @@ public class Player : MonoBehaviour {
     private GameObject m_Sacrifice;
 
     public KeyCode m_DropSacrifice;
+    public KeyCode m_Attack;
 
     #region Player States
 
@@ -132,6 +133,7 @@ public class Player : MonoBehaviour {
 
         m_PowerStateTimers.Add(PowerStates.Invulnerability, 0);
         m_PowerStateTimers.Add(PowerStates.SuperSpeed, 0);
+
 	}
 	
 	// Update is called once per frame
@@ -177,7 +179,9 @@ public class Player : MonoBehaviour {
 
     void HandleKeys()
     {
-
+        Debug.Log("A: " + m_Attack);
+        if (Input.GetKeyDown(m_Attack))
+            GetComponentInChildren<Weapon>().Attack();
 
         #region Debug Keys
         if (Input.GetKeyDown(m_ForceSlow)) ApplyDebuff(Debuffs.Slow, 0.5f, 5);

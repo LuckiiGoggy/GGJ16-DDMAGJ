@@ -56,6 +56,7 @@ public class Weapon : MonoBehaviour {
 
     public void Attack()
     {
+        Debug.Log("Attack");
         if(!m_IsAttacking)
         {
             m_IsAttacking = true;
