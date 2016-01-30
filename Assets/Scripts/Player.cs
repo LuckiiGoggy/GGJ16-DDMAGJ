@@ -11,13 +11,14 @@ public class Player : MonoBehaviour {
     private bool mIsHoldingSacrafice;
     private bool m_IsInGodMode;
 
-    public void PickUpSacrafice()
+	public void PickUpSacrifice(GameObject sacrafice)
     {
-        print("pick up sacrafice");
+		print("pick up sacrafice");
+		Destroy (sacrafice);
         mIsHoldingSacrafice = true;
     }
 
-    public void DropSacrafice()
+    public void DropSacrifice()
     {
         if (mIsHoldingSacrafice)
         {
@@ -29,11 +30,14 @@ public class Player : MonoBehaviour {
         }
     }
 
-    public void PlaceSacrafice()
+    public void PlaceSacrifice()
     {
         if (mIsHoldingSacrafice)
         {
             print("place sacrafice in box");
+			mIsHoldingSacrafice = false;
+
+			Instantiate (sacrifice);
         }
     }
 	// Use this for initialization
@@ -43,7 +47,7 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-        PlayerMovement control = GetComponent<PlayerMovement>();
+        PlayerMovement control = gameObject.GetComponent<PlayerMovement>();
 
         if (m_StunTimer > 0)
         {
@@ -82,6 +86,15 @@ public class Player : MonoBehaviour {
             }
         }
     }
+
+	void OnCollisionEnter2D(Collision2D coll)
+	{
+		print ("player collides with something");
+		if (coll.gameObject.tag == "Sacrifice") {
+			print ("Player collides Sacrifice");
+			PickUpSacrifice (coll.gameObject);
+		}
+	}
 
     public void GodModeOn() { m_IsInGodMode = true; }
     public void GodModeOff() { m_IsInGodMode = false; }
