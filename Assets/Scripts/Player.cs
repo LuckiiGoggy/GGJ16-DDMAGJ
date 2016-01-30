@@ -171,6 +171,7 @@ public class Player : MonoBehaviour {
     {
         if (m_IsInGodMode)
         {
+            GetComponentInChildren<Weapon>().SetGodWeapon();
         }
     }
 
@@ -208,6 +209,8 @@ public class Player : MonoBehaviour {
 				} else {
 					m_SlowTimer = weapon.m_SlowLength;
 				}
+
+                if (weapon.IsGodWeapon()) Destroy(this.gameObject); 
             }
         }
     }

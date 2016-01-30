@@ -22,7 +22,7 @@ public class Base : MonoBehaviour {
         }
         else
         {
-			m_Owner.GetComponent<Player>().GodModeOff();
+			//m_Owner.GetComponent<Player>().GodModeOff();
         }
     }
 
