@@ -2,14 +2,14 @@
 using System.Collections;
 
 public class Sacrifice : MonoBehaviour {
-
-	public GameObject m_Sacrifice;
+	
 	private GameObject mOwner;
     public string sacrificeType;
 
 
 	public void Respawn() {
-		Instantiate (m_Sacrifice);
+
+        Instantiate(gameObject);
         int randomNumber = Random.Range(0, 2);
         switch (randomNumber) {
             case 0:
