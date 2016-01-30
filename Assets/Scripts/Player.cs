@@ -172,8 +172,12 @@ public class Player : MonoBehaviour {
         {
             if (weapon.m_IsAttacking)
             {
-                
-                m_SlowTimer = weapon.m_SlowLength;
+				if (mIsHoldingSacrafice) {
+					m_StunTimer = weapon.m_StunLength;
+					DropSacrifice ();
+				} else {
+					m_SlowTimer = weapon.m_SlowLength;
+				}
             }
         }
     }
@@ -181,7 +185,7 @@ public class Player : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D coll)
 	{
 		print ("player collides with something");
-		if (coll.gameObject.tag == "Sacrifice") {
+		if (coll.gameObject.tag == "Sacrifice" && m_StunTimer <= 0) {
 			print ("Player collides Sacrifice");
 			PickUpSacrifice (coll.gameObject);
 		}
