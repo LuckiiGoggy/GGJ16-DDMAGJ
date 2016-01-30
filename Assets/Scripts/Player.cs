@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Player : MonoBehaviour {
     public float m_StunTimer;
@@ -9,7 +10,74 @@ public class Player : MonoBehaviour {
     public GameObject sacrifice;
 
     private bool mIsHoldingSacrafice;
+
+    #region Player States
+
+    private bool m_IsInvulnerable;
     private bool m_IsInGodMode;
+
+    #endregion
+
+    #region Debuffs
+    public enum Debuffs { Stun, Slow }
+
+    public Dictionary<Debuffs, float> m_DebuffTimers;
+
+
+    #endregion
+
+
+
+    #region Power States
+
+    /// <summary>
+    /// The different power state variables the player has
+    /// </summary>
+    public enum PowerStates { SuperSpeed, Invulnerability };
+
+    public Dictionary<PowerStates, float> m_PowerStateTimers;
+
+    #endregion
+
+
+    public void ApplyPowerUp(PowerStates powerState, float modifier, float duration)
+    {
+        PlayerMovement control = GetComponent<PlayerMovement>();
+        m_PowerStateTimers[powerState] = duration;
+
+        switch (powerState)
+        {
+            case PowerStates.SuperSpeed:
+                control._fMoveSpeed = Mathf.Max(control._fMoveSpeed, m_MovementSpeed * modifier);
+                break;
+            case PowerStates.Invulnerability:
+                m_IsInvulnerable = true;
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void ApplyDebuff(Debuffs debuff, float modifier, float duration)
+    {
+        PlayerMovement control = GetComponent<PlayerMovement>();
+        m_DebuffTimers[debuff] = duration;
+
+        switch (debuff)
+        {
+            case Debuffs.Stun:
+                control._fMoveSpeed = Mathf.Min(m_MovementSpeed * 0.5f, 0);
+                m_SlowTimer = Mathf.Max(m_SlowTimer - Time.fixedDeltaTime, 0);
+                break;
+            case Debuffs.Slow:
+                control._fMoveSpeed = Mathf.Min(m_MovementSpeed * modifier, control._fMoveSpeed);
+                m_SlowTimer = Mathf.Max(m_SlowTimer - Time.fixedDeltaTime, 0);
+                break;
+            default:
+                break;
+        }
+    }
+
 
 	public void PickUpSacrifice(GameObject sacrafice)
     {
@@ -49,22 +117,20 @@ public class Player : MonoBehaviour {
 	void FixedUpdate () {
         PlayerMovement control = gameObject.GetComponent<PlayerMovement>();
 
-        if (m_StunTimer > 0)
-        {
-            control._fMoveSpeed = 0;
-            m_StunTimer = Mathf.Max(m_StunTimer - Time.fixedDeltaTime, 0);
-        }
+        foreach (Debuffs debuff in m_DebuffTimers.Keys) 
+            m_DebuffTimers[debuff] = Mathf.Max(m_DebuffTimers[debuff] - Time.fixedDeltaTime, 0);
+        foreach (PowerStates powerState in m_PowerStateTimers.Keys) 
+            m_PowerStateTimers[powerState] = Mathf.Max(m_PowerStateTimers[powerState] - Time.fixedDeltaTime, 0);
+        
 
-        if (m_SlowTimer > 0)
-        {
-            control._fMoveSpeed = Mathf.Min(m_MovementSpeed * 0.5f, control._fMoveSpeed);
-            m_SlowTimer = Mathf.Max(m_SlowTimer - Time.fixedDeltaTime, 0);
-        }
-
-        if(m_StunTimer == 0 && m_SlowTimer == 0)
+        if(m_PowerStateTimers[PowerStates.SuperSpeed] == 0 &&
+            m_DebuffTimers[Debuffs.Slow] == 0 &&
+            m_DebuffTimers[Debuffs.Stun] == 0)
         {
             control._fMoveSpeed = m_MovementSpeed;
         }
+
+        if (m_PowerStateTimers[PowerStates.Invulnerability] == 0) m_IsInvulnerable = false;
 	}
 
     /// <summary>
