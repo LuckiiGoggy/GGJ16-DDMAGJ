@@ -6,8 +6,8 @@ public class Sacrifice : MonoBehaviour {
 	public GameObject m_Sacrifice;
 	private GameObject mOwner;
 
-	public static void Respawn() {
-		
+	public void Respawn() {
+		Instantiate (m_Sacrifice);
 	}
 
 	public void SetOwner(GameObject owner) {

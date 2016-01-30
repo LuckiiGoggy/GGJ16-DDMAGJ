@@ -85,7 +85,7 @@ public class Player : MonoBehaviour {
         }
     }
 
-
+	/*
 	public void PickUpSacrifice(GameObject sacrifice)
     {
 		print("pick up sacrafice");
@@ -93,7 +93,7 @@ public class Player : MonoBehaviour {
 		sacrifice.GetComponent<Sacrifice> ().SetOwner (gameObject);
 		m_Sacrifice = sacrifice;
     }
-
+	
 	public void DropSacrifice(Vector3 away)
     {
 		if (m_Sacrifice != null)
@@ -114,10 +114,10 @@ public class Player : MonoBehaviour {
             print("place sacrafice in box");
 			m_Sacrifice.GetComponent<Sacrifice> ().SetOwner (null);
 			m_Sacrifice = null;
-
-			Sacrifice.Respawn ();
         }
     }
+	*/
+
 	// Use this for initialization
 	void Start () {
         m_DebuffTimers = new Dictionary<Debuffs, float>();
@@ -167,9 +167,9 @@ public class Player : MonoBehaviour {
 
         #region Debug Keys
         if (Input.GetKeyDown(m_ForceSlow)) ApplyDebuff(Debuffs.Slow, 0.5f, 5);
-		if (Input.GetKeyDown(m_DropSacrifice)) {
+		/*if (Input.GetKeyDown(m_DropSacrifice)) {
 			DropSacrifice(new Vector3(10, 10, 0));
-		}
+		}*/
         #endregion
     }
 
@@ -191,7 +191,7 @@ public class Player : MonoBehaviour {
 				print (string.Format("weapon {0} hit player {1}", coll.name, name));
 				if (m_Sacrifice != null) {
 					m_StunTimer = weapon.m_StunLength;
-					DropSacrifice (transform.position - coll.transform.position);
+					// DropSacrifice (transform.position - coll.transform.position);
 				} else {
 					m_SlowTimer = weapon.m_SlowLength;
 				}
@@ -202,10 +202,11 @@ public class Player : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D coll)
 	{
 		print ("player collides with something: " + coll.gameObject.tag);
+		/* not picking up the sacrifice right now
 		if (coll.gameObject.tag == "Sacrifice" && m_StunTimer <= 0) {
 			print ("Player collides Sacrifice");
 			PickUpSacrifice (coll.gameObject);
-		}
+		} */
 	}
 
     public void GodModeOn() { m_IsInGodMode = true; }
