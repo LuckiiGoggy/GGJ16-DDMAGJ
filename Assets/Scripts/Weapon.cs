@@ -10,6 +10,7 @@ public class Weapon : MonoBehaviour {
     public bool m_IsAttacking;
 
     public float m_StunLength;
+    public float m_SlowLength;
 
 	// Use this for initialization
 	void Start () {
