@@ -16,9 +16,12 @@ public class PlayerController : MonoBehaviour {
 
 	void Awake ()
 	{
+
 		// first get the playermovement and playerrotation on THIS script's gameobject
 		_playerMovement_ref = GetComponent<PlayerMovement> ();
-		_playerRotation_ref = GetComponent<PlayerRotation> ();
+        _playerRotation_ref = GetComponent<PlayerRotation>();
+        // and the player
+        m_Player = GetComponent<Player>();
 
 		// then tell the inputcontrollermanager to set its static variables to match
 		// THIS script's _iControllerNumber,
@@ -30,8 +33,7 @@ public class PlayerController : MonoBehaviour {
 		// [playerrotation]
 		_playerRotation_ref._horizontalAxis = InputControllerManager._horizontalAxis;
 		_playerRotation_ref._verticalAxis = InputControllerManager._verticalAxis;
-	
-        
 
+        m_Player.m_Attack = InputControllerManager._button01;
     }
 }
