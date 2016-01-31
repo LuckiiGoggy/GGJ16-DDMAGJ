@@ -40,8 +40,6 @@ public class Base : MonoBehaviour {
 
 	public void AddSacrifice(GameObject sacrifice)
 	{
-		m_Spawner.Spawn();
-
 		m_Completed[(int) sacrifice.GetComponent<Sacrifice>().m_SacrificeType] = true;
 		Destroy (sacrifice);
 
@@ -56,10 +54,11 @@ public class Base : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D coll)
 	{
-		print ("base triggers with something: " + coll.gameObject.tag);
+        if (coll.gameObject.tag == "Sacrifice" || coll.gameObject.tag == "Item")
+            m_Spawner.Spawn();
+
 
 		if (coll.gameObject.tag == "Sacrifice") {
-			print ("Sacrifice triggers base");
 			AddSacrifice (coll.gameObject);
 		}
 
