@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour {
 
 		// animation stuff end
 
-		_movement = new Vector2 (Input.GetAxisRaw(_horizontalAxis), Input.GetAxisRaw(_verticalAxis));
+		_movement = new Vector2 (Input.GetAxisRaw (_horizontalAxis), Input.GetAxisRaw (_verticalAxis));
 		_movement.Normalize ();
 		_rigidbody.velocity = _movement * _fMoveSpeed;
 	}
