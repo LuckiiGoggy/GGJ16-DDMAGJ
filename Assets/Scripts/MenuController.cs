@@ -37,7 +37,11 @@ public class MenuController : MonoBehaviour {
                 // Call your event function here.
                 if (vertAxis > 0)
                 {
-                    if (menuState != 4)
+                    if (menuState == -1)
+                    {
+                        Mmenubase._menuState = 1;
+                    }
+                    else if (menuState != 4)
                     {
                         Mmenubase._menuState = (menuState + 1);
                     }
@@ -45,15 +49,19 @@ public class MenuController : MonoBehaviour {
 
                 if (vertAxis < 0)
                 {
-                    if (menuState != 1)
+                    if (menuState != 1 && menuState != -1)
                     {
                         Mmenubase._menuState = (menuState - 1);
+                    } else if (menuState == 1 || menuState == -1)
+                    {
+                        Mmenubase._menuState = -1;
                     }
                 }
 
                 m_isAxisInUse = true;
             }
         }
+
         if (vertAxis == 0)
         {
             m_isAxisInUse = false;
