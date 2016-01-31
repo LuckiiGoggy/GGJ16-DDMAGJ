@@ -10,9 +10,9 @@ GameObject:
   - 4: {fileID: 422666}
   - 212: {fileID: 21201826}
   - 114: {fileID: 11487166}
-  - 58: {fileID: 5860660}
   - 50: {fileID: 5041690}
   - 114: {fileID: 11488208}
+  - 61: {fileID: 6192470}
   m_Layer: 0
   m_Name: SpeedPowerUp
   m_TagString: Item
@@ -27,8 +27,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 183684}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.8601286, y: -2.40481, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 4.07, y: 0.42, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.4441803}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -49,8 +49,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!58 &5860660
-CircleCollider2D:
+--- !u!61 &6192470
+BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -60,9 +60,9 @@ CircleCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.04682306, y: -0.046824295}
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Size: {x: 2.4042013, y: 3.965007}
 --- !u!114 &11487166
 MonoBehaviour:
   m_ObjectHideFlags: 1

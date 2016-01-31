@@ -1438,7 +1438,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!114 &1314791750 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 11412844, guid: 9f8222a3704888b4a845ce98ad7a19a6,
