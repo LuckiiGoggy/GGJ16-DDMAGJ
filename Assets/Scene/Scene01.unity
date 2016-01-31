@@ -486,6 +486,64 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+--- !u!1 &217404020
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 217404022}
+  - 212: {fileID: 217404021}
+  m_Layer: 0
+  m_Name: background background
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!212 &217404021
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 217404020}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_ReflectionProbeUsage: 0
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: e44e3aca75b87724f8b2c758f7927997, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+--- !u!4 &217404022
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 217404020}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.9632695, y: -1.627478, z: 7.22}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
 --- !u!1001 &255264041
 Prefab:
   m_ObjectHideFlags: 0
@@ -1353,6 +1411,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 794789760}
+  - 68: {fileID: 794789761}
   m_Layer: 0
   m_Name: totem4
   m_TagString: Untagged
@@ -1367,7 +1426,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 794789759}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071067}
-  m_LocalPosition: {x: -7.39, y: -3.71, z: 0}
+  m_LocalPosition: {x: -8.3, y: -4.83, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1438655917}
@@ -1378,6 +1437,23 @@ Transform:
   - {fileID: 297594593}
   m_Father: {fileID: 894948713}
   m_RootOrder: 3
+--- !u!68 &794789761
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 794789759}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  m_Points:
+  - {x: 0.13907278, y: -0.82842773}
+  - {x: 0.91529155, y: -1.2802377}
+  - {x: 1.3325667, y: -0.8808385}
+  - {x: 0.85504025, y: -0.023670297}
 --- !u!1 &811167237
 GameObject:
   m_ObjectHideFlags: 0
@@ -2021,7 +2097,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11472274, guid: 9f8222a3704888b4a845ce98ad7a19a6, type: 2}
       propertyPath: _iControllerNumber
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 483734, guid: 9f8222a3704888b4a845ce98ad7a19a6, type: 2}
       propertyPath: m_LocalScale.x
@@ -2108,6 +2184,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1283709218}
+  - 68: {fileID: 1283709219}
   m_Layer: 0
   m_Name: totem1
   m_TagString: Untagged
@@ -2122,7 +2199,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1283709217}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.2, y: 3.45, z: 0}
+  m_LocalPosition: {x: -8.29, y: 4.49, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1702752792}
@@ -2133,6 +2210,23 @@ Transform:
   - {fileID: 1603934867}
   m_Father: {fileID: 894948713}
   m_RootOrder: 0
+--- !u!68 &1283709219
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1283709217}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  m_Points:
+  - {x: -0.09865856, y: -0.67594457}
+  - {x: 0.86847734, y: -1.2434976}
+  - {x: 1.3065281, y: -0.84689474}
+  - {x: 0.81684923, y: 0}
 --- !u!1 &1298427098
 GameObject:
   m_ObjectHideFlags: 0
@@ -2566,6 +2660,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1450995276}
+  - 68: {fileID: 1450995277}
   m_Layer: 0
   m_Name: totem2
   m_TagString: Untagged
@@ -2580,7 +2675,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1450995275}
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071067}
-  m_LocalPosition: {x: 7.21, y: 3.45, z: 0}
+  m_LocalPosition: {x: 8.33, y: 4.65, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2111344933}
@@ -2591,6 +2686,23 @@ Transform:
   - {fileID: 1913924759}
   m_Father: {fileID: 894948713}
   m_RootOrder: 1
+--- !u!68 &1450995277
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1450995275}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  m_Points:
+  - {x: 0.090780824, y: -0.8033771}
+  - {x: 0.9248682, y: -1.2503026}
+  - {x: 1.2951539, y: -0.8852408}
+  - {x: 0.86090726, y: 0.12030325}
 --- !u!1 &1570528286
 GameObject:
   m_ObjectHideFlags: 0
@@ -3126,7 +3238,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 6.48
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3147,7 +3259,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1679327368}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0.01, y: -0.05, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4075,6 +4187,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 2079445021}
+  - 68: {fileID: 2079445022}
   m_Layer: 0
   m_Name: totem3
   m_TagString: Untagged
@@ -4089,7 +4202,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2079445020}
   m_LocalRotation: {x: 0, y: 0, z: -1, w: -0.00000016292068}
-  m_LocalPosition: {x: 7.21, y: -3.71, z: 0}
+  m_LocalPosition: {x: 8.41, y: -4.96, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 427088958}
@@ -4100,6 +4213,23 @@ Transform:
   - {fileID: 1337152226}
   m_Father: {fileID: 894948713}
   m_RootOrder: 2
+--- !u!68 &2079445022
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2079445020}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  m_Points:
+  - {x: 0.1115544, y: -0.7701039}
+  - {x: 0.93520397, y: -1.2454528}
+  - {x: 1.2946541, y: -0.8984409}
+  - {x: 0.998303, y: -0.22650114}
 --- !u!1 &2108718671
 GameObject:
   m_ObjectHideFlags: 0
