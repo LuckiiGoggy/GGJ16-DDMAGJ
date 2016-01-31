@@ -38,10 +38,12 @@ public class Base : MonoBehaviour {
             if (SacrificesCompleted)
             {
                 m_Owner.GetComponent<Player>().GodModeOn();
+                m_Spawner.StartSpawningShields();
             }
             else
             {
                 m_Owner.GetComponent<Player>().GodModeOff();
+                m_Spawner.StopSpawningShields();
             }
         }
 	}
