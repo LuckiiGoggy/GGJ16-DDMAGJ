@@ -205,7 +205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69f8b654b55b63f42ab53f6a55705e99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _iControllerNumber: 0
+  _iControllerNumber: 1
   m_isAxisInUse: 0
 --- !u!114 &86289572
 MonoBehaviour:
@@ -257,7 +257,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69f8b654b55b63f42ab53f6a55705e99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _iControllerNumber: 1
+  _iControllerNumber: 0
   m_isAxisInUse: 0
 --- !u!1 &122809024
 GameObject:
