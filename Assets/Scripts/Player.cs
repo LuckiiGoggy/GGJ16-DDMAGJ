@@ -199,7 +199,8 @@ public class Player : MonoBehaviour {
         if (m_PowerStateTimers[PowerStates.SuperSpeed] == 0 &&
            m_DebuffTimers[Debuffs.Slow] == 0)
         {
-            control._fMoveSpeed = m_MovementSpeed;
+            if(control != null)
+                control._fMoveSpeed = m_MovementSpeed;
         }
 
         if (m_DebuffTimers[Debuffs.Stun] == 0)
@@ -287,7 +288,7 @@ public class Player : MonoBehaviour {
     {
         Destroy(this.gameObject, 1f);
         GetComponent<PlayerMovement>().enabled = false;
-        GetComponent<Player>().enabled = false;
+        //GetComponent<Player>().enabled = false;
     }
 
     void OnCollisionEnter2D(Collision2D coll)
