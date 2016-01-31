@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -29,7 +30,7 @@ public class MenuController : MonoBehaviour {
 	{
 		if (Input.GetKey(input._button01)) {
 			print ("start game");
-			Application.LoadLevel("Scene01");
+			SceneManager.LoadScene("Scene01");
 		}
 
 		if (Input.GetAxisRaw(input._verticalAxis) > 0 && !(m_PreviousAxis > 0)) {
@@ -40,7 +41,7 @@ public class MenuController : MonoBehaviour {
 			m_Current = Math.Max(--m_Current, 0);
 		}
 
-		m_MenuTotemParts [m_Current].OnMouseOver ();
+		m_MenuTotemParts [m_Current].ActivateTotemPart ();
 
 		m_PreviousAxis = Input.GetAxisRaw (input._verticalAxis);
 	}
