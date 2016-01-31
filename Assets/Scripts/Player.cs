@@ -292,7 +292,10 @@ public class Player : MonoBehaviour {
     void Death()
     {
         Destroy(this.gameObject, 1f);
-        GetComponent<PlayerMovement>().enabled = false;
+		if (GetComponent<PlayerMovement> ()) {
+			GetComponent<PlayerMovement>().enabled = false;
+		}
+        
         //GetComponent<Player>().enabled = false;
     }
 
