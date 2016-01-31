@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour {
 		_rigidbody.velocity = _movement * _fMoveSpeed;
 	}
 
-	private void SlowPlayer ()
+    private void SlowPlayer ()
 	{
 		StartCoroutine (SlowPlayerTimer ());
 	}
