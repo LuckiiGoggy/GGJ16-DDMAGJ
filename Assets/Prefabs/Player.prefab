@@ -28,13 +28,13 @@ GameObject:
   - 212: {fileID: 21254450}
   - 114: {fileID: 11412844}
   - 114: {fileID: 11472274}
-  - 58: {fileID: 5878024}
   - 50: {fileID: 5092998}
   - 114: {fileID: 11467028}
   - 114: {fileID: 11480020}
   - 114: {fileID: 11496344}
   - 95: {fileID: 9558476}
   - 114: {fileID: 11466798}
+  - 60: {fileID: 6015754}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -91,7 +91,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 165196}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -5.789888, y: 2.2549734, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 400954}
@@ -115,8 +115,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!58 &5878024
-CircleCollider2D:
+--- !u!60 &6015754
+PolygonCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -126,9 +126,32 @@ CircleCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: -0.17}
-  serializedVersion: 2
-  m_Radius: 1
+  m_Offset: {x: 0, y: 0}
+  m_Points:
+    m_Paths:
+    - - {x: 0.84730625, y: -0.721946}
+      - {x: 0.8787842, y: -0.5392103}
+      - {x: 0.85485077, y: -0.3536458}
+      - {x: 0.75423145, y: -0.25563192}
+      - {x: 0.65100765, y: -0.19459677}
+      - {x: 0.47346973, y: -0.10026121}
+      - {x: 0.17089844, y: -0.024414062}
+      - {x: -0.012207031, y: 0.036621094}
+      - {x: -0.39134026, y: 0.031769753}
+      - {x: -0.6639309, y: -0.02037859}
+      - {x: -0.7885761, y: -0.10372734}
+      - {x: -0.90699863, y: -0.2319336}
+      - {x: -0.9033203, y: -0.32958984}
+      - {x: -0.9277344, y: -0.48828125}
+      - {x: -0.87890625, y: -0.57373047}
+      - {x: -0.72021484, y: -0.6347656}
+      - {x: -0.56233025, y: -0.72692823}
+      - {x: -0.2685547, y: -0.76904297}
+      - {x: -0.089138985, y: -0.84028554}
+      - {x: 0.012207031, y: -0.87890625}
+      - {x: 0.2705536, y: -0.80394053}
+      - {x: 0.4153967, y: -0.78125}
+      - {x: 0.65989494, y: -0.8386071}
 --- !u!61 &6116382
 BoxCollider2D:
   m_ObjectHideFlags: 1

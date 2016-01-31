@@ -159,6 +159,10 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+		if (GameObject.FindGameObjectsWithTag ("Player").Count () <= 1) {
+			Destroy (gameObject.GetComponent<PlayerMovement> ());
+			GameObject.Find ("EndGame").GetComponent<EndGame>().PlayerWins (GameObject.FindGameObjectWithTag ("Player"));
+		}
 
 		PlayerMovement control = gameObject.GetComponent<PlayerMovement>();
 
@@ -263,8 +267,9 @@ public class Player : MonoBehaviour {
 				//	ApplyDebuff(Debuffs.Stun, 42f, weapon.m_StunLength);
 
 
-				if (weapon.IsGodWeapon() && !m_IsInvulnerable) 
-					Destroy(this.gameObject); 
+				if (weapon.IsGodWeapon () && !m_IsInvulnerable) {
+					Destroy (this.gameObject); 
+				}
             }
         }
 
