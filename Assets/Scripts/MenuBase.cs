@@ -14,10 +14,22 @@ public class MenuBase : MonoBehaviour {
     // load correct level for _menuState
     public void LoadLevel()
     {
-        if (_menuState == 0)
+        if (_menuState <= 0)
         {
             return;
-        } else
+        } else if (_menuState == 1)
+        {
+            Application.LoadLevel("Scene1p");
+        }
+        else if (_menuState == 2)
+        {
+            Application.LoadLevel("Scene2p");
+        }
+        else if (_menuState == 3)
+        {
+            Application.LoadLevel("Scene3p");
+        }
+        else
         {
             Application.LoadLevel("Scene01");
         }
