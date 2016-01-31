@@ -71,7 +71,9 @@ public class AIPlayerMovement : PlayerMovement
             _movement.Normalize();
         }
 
-        _rigidbody.velocity = _movement * _fMoveSpeed;
+        float randomNumberA = Random.Range(0.5f, 2);
+
+        _rigidbody.velocity = _movement * (_fMoveSpeed * randomNumberA);
         if (lastMoveHor != hor || lastMoveVer != ver)
         {
             AIPlayer player = GetComponent<AIPlayer>();
