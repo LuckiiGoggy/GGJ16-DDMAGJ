@@ -24,10 +24,10 @@ public class MenuController : MonoBehaviour {
 
 	void Update ()
 	{
-        MenuBase menubase = GetComponent<MenuBase>();
-        int menuState = menubase._menuState;
+        MenuBase Mmenubase = GetComponent<MenuBase>();
+        int menuState = Mmenubase._menuState;
         if (Input.GetKey(input._button01)) {
-            menubase.LoadLevel();
+            Mmenubase.LoadLevel();
 		}
         float vertAxis = Input.GetAxisRaw(input._verticalAxis);
         if (vertAxis != 0)
@@ -39,7 +39,7 @@ public class MenuController : MonoBehaviour {
                 {
                     if (menuState != 4)
                     {
-                        menubase._menuState = (menuState + 1);
+                        Mmenubase._menuState = (menuState + 1);
                     }
                 }
 
@@ -47,7 +47,7 @@ public class MenuController : MonoBehaviour {
                 {
                     if (menuState != 1)
                     {
-                        menubase._menuState = (menuState - 1);
+                        Mmenubase._menuState = (menuState - 1);
                     }
                 }
 
