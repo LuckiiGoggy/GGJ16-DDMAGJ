@@ -11,15 +11,17 @@ public class Base : MonoBehaviour {
 
     public void FixedUpdate()
     {
-        if(m_CurrentSacrificeCount >= m_RequiredSacrifices)
-        {
-            Debug.Log("Enough Sacrifices");
-			m_Owner.GetComponent<Player>().GodModeOn();
-        }
-        else
-        {
-			m_Owner.GetComponent<Player>().GodModeOff();
-        }
+		if (m_Owner != null) {
+			if(m_CurrentSacrificeCount >= m_RequiredSacrifices)
+			{
+				Debug.Log("Enough Sacrifices");
+				m_Owner.GetComponent<Player>().GodModeOn();
+			}
+			else
+			{
+				m_Owner.GetComponent<Player>().GodModeOff();
+			}
+		}
     }
 
 	public void AddSacrifice(GameObject sacrifice)

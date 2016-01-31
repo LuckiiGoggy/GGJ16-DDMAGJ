@@ -9,12 +9,15 @@ GameObject:
   m_Component:
   - 4: {fileID: 483734}
   - 212: {fileID: 21254450}
-  - 114: {fileID: 11443876}
   - 114: {fileID: 11412844}
   - 114: {fileID: 11472274}
   - 58: {fileID: 5878024}
   - 50: {fileID: 5092998}
-  - 114: {fileID: 11401670}
+  - 114: {fileID: 11467028}
+  - 114: {fileID: 11480020}
+  - 114: {fileID: 11496344}
+  - 95: {fileID: 9558476}
+  - 114: {fileID: 11466798}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -34,7 +37,7 @@ GameObject:
   - 114: {fileID: 11452544}
   - 61: {fileID: 6116382}
   m_Layer: 0
-  m_Name: Weapon
+  m_Name: Weapon 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,8 +50,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 167578}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.69, y: 1.3, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.08, y: 0.69, z: 0}
+  m_LocalScale: {x: 0.67459613, y: 0.17820242, z: 1}
   m_Children: []
   m_Father: {fileID: 483734}
   m_RootOrder: 0
@@ -59,8 +62,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 165196}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.08, y: -3.23, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
+  m_LocalPosition: {x: -6.79, y: 1.81, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 400954}
   m_Father: {fileID: 0}
@@ -76,7 +79,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -93,16 +96,16 @@ CircleCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.17}
   serializedVersion: 2
-  m_Radius: 2.02
+  m_Radius: 1
 --- !u!61 &6116382
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 167578}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -110,25 +113,23 @@ BoxCollider2D:
   m_Offset: {x: -0.0000076293945, y: 0}
   serializedVersion: 2
   m_Size: {x: 2.42, y: 7.97}
---- !u!114 &11401670
-MonoBehaviour:
+--- !u!95 &9558476
+Animator:
+  serializedVersion: 3
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 165196}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3ecb6082aff92f41997d9ad2c67247b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  joyStickNumber: 0
-  _velocity: {x: 0, y: 0}
-  _magnitude: 0
-  _fMoveSpeed: 1
-  joystickFloat: 0
-  _horizontalAxis: 
-  _verticalAxis: 
-  _rigidbody: {fileID: 0}
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bb6f97b780da6ec43b251139b18547b1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11412844
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -142,31 +143,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_StunTimer: 0
   m_SlowTimer: 0
-  m_MovementSpeed: 0
+  m_MovementSpeed: 5
   m_DropSacrifice: 0
+  m_Attack: 0
+  m_IsInvulnerable: 0
+  m_IsInGodMode: 0
+  m_TransformationLength: 3
   m_ForceSlow: 0
   m_DebuffTimersKeys: 
   m_DebuffTimersValues: []
   m_PowerStateTimersKeys: 
   m_PowerStateTimersValues: []
---- !u!114 &11443876
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 165196}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a30860028e8342e45bfe44a9f573054f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Up: 119
-  m_Down: 115
-  m_Left: 97
-  m_Right: 100
-  m_Drop: 0
-  m_Attack: 32
-  m_MovementSpeed: 0.1
 --- !u!114 &11452544
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -178,11 +165,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c20a1e0e88dd75e4a95a845874482d75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AnimationLength: 0.5
-  m_AttackRange: 2
   m_IsAttacking: 0
+  m_AttackWaitTimer: 0.5
+  m_WeaponTriggerTimer: 0.15
   m_StunLength: 2
   m_SlowLength: 0
+  m_IsGodWeapon: 0
+--- !u!114 &11466798
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 165196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 815e99cccfc761149a23eeb0ef0eb7b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_animationsSpeed: 1
+  animator: {fileID: 0}
+--- !u!114 &11467028
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 165196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81389cd1f0f081e4f8d7d5c0010d6cb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fMoveSpeed: 8
+  _fSlowPlayerTimer: 3
+  _fStunPlayerTimer: 3
+  _horizontalAxis: 
+  _verticalAxis: 
+  _movement: {x: 0, y: 0}
 --- !u!114 &11472274
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -191,17 +209,38 @@ MonoBehaviour:
   m_GameObject: {fileID: 165196}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3ecb6082aff92f41997d9ad2c67247b, type: 3}
+  m_Script: {fileID: 11500000, guid: b78f086aaa7b0df48a042b126db09a5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  joyStickNumber: 0
-  _velocity: {x: 0, y: 0}
-  _magnitude: 0
-  _fMoveSpeed: 1
-  joystickFloat: 0
+  _iControllerNumber: 1
+--- !u!114 &11480020
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 165196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fd18f92e488c5e4c90f8a9dcff0cae4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   _horizontalAxis: 
   _verticalAxis: 
-  _rigidbody: {fileID: 0}
+--- !u!114 &11496344
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 165196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d00050df6c8baec429c7d9ab64198ea4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  joystickFloatX: 0
+  joystickFloatY: 0
+  _velocity: {x: 0, y: 0}
+  _magnitude: 0
 --- !u!212 &21254450
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -228,7 +267,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0e6ba130bcdad8943ae9ffd705087251, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 58fb40fa8806f6d41a05c80b98b7738f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -238,7 +277,7 @@ SpriteRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 167578}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_Materials:

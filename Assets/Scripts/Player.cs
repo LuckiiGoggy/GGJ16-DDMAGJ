@@ -51,6 +51,7 @@ public class Player : MonoBehaviour {
 
     #endregion
 
+	private Animator animator;
 
     public void ApplyPowerUp(PowerStates powerState, float modifier, float duration)
     {
@@ -138,6 +139,7 @@ public class Player : MonoBehaviour {
         PlayerMovement control = gameObject.GetComponent<PlayerMovement>();
         control._fMoveSpeed = m_MovementSpeed;
 
+		animator = GetComponent<Animator> ();
 	}
 	
 	// Update is called once per frame
@@ -149,14 +151,14 @@ public class Player : MonoBehaviour {
         foreach (PowerStates powerState in m_PowerStateTimers.Keys.ToList()) 
             m_PowerStateTimers[powerState] = Mathf.Max(m_PowerStateTimers[powerState] - Time.fixedDeltaTime, 0);
 
-        Debug.Log("Before: " + control._fMoveSpeed);
+        //Debug.Log("Before: " + control._fMoveSpeed);
         if(m_PowerStateTimers[PowerStates.SuperSpeed] == 0 &&
             m_DebuffTimers[Debuffs.Slow] == 0 &&
             m_DebuffTimers[Debuffs.Stun] == 0)
         {
             control._fMoveSpeed = m_MovementSpeed;
         }
-        Debug.Log("After: " + control._fMoveSpeed);
+        //Debug.Log("After: " + control._fMoveSpeed);
 
         if (m_PowerStateTimers[PowerStates.Invulnerability] == 0) m_IsInvulnerable = false;
 
@@ -184,7 +186,7 @@ public class Player : MonoBehaviour {
 
     void HandleKeys()
     {
-        Debug.Log("A: " + m_Attack);
+        //Debug.Log("A: " + m_Attack);
         if (Input.GetKeyDown(m_Attack))
             GetComponentInChildren<Weapon>().Attack();
 
@@ -212,12 +214,14 @@ public class Player : MonoBehaviour {
             if (weapon.m_IsAttacking)
             {
 				print (string.Format("weapon {0} hit player {1}", coll.name, name));
-				if (m_Sacrifice != null) {
+				// if (m_Sacrifice != null) {
 					m_StunTimer = weapon.m_StunLength;
+
+					ApplyDebuff (Debuffs.Slow, .1f, 10);
 					// DropSacrifice (transform.position - coll.transform.position);
-				} else {
-					m_SlowTimer = weapon.m_SlowLength;
-				}
+				//} else {
+				//	m_SlowTimer = weapon.m_SlowLength;
+				//}
 
                 if (weapon.IsGodWeapon()) Destroy(this.gameObject); 
             }
@@ -239,6 +243,8 @@ public class Player : MonoBehaviour {
         if (m_IsInGodMode) return;
 
         m_IsInGodMode = true;
+
+		animator.SetTrigger ("IsGod");
 
         //Change Sprite
         //Activate Animation

@@ -17,14 +17,31 @@ public class PlayerMovement : MonoBehaviour {
 	public Vector2 _movement;
 
 	private Rigidbody2D _rigidbody;
+	private PlayerAnimation playerAnimation;
 
 	void Start ()
 	{
 		_rigidbody = GetComponent<Rigidbody2D> ();
+		playerAnimation = GetComponent<PlayerAnimation> ();
 	}
 
 	void FixedUpdate ()
 	{
+		// animation stuff
+		if (Input.GetAxisRaw (_horizontalAxis) != 0 || Input.GetAxisRaw (_verticalAxis) != 0) {
+			playerAnimation.animator.SetBool ("Walk", true);
+		} else {
+			playerAnimation.animator.SetBool ("Walk", false);
+		}
+
+		if (_rigidbody.velocity.magnitude > 0) {
+			playerAnimation.m_animationsSpeed = _rigidbody.velocity.magnitude / 5;
+		} else {
+			playerAnimation.m_animationsSpeed = 1;
+		}
+
+		// animation stuff end
+
 		_movement = new Vector2 (Input.GetAxisRaw(_horizontalAxis), Input.GetAxisRaw(_verticalAxis));
 		_movement.Normalize ();
 		_rigidbody.velocity = _movement * _fMoveSpeed;
