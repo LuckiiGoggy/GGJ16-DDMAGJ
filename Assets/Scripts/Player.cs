@@ -282,10 +282,13 @@ public class Player : MonoBehaviour {
             }
         }
 
-        if (coll.tag == "Meteor")
-            Destroy(this.gameObject);
     }
 
+    void OnCollisionEnter2D(Collision2D coll)
+    {
+        if (coll.gameObject.tag == "Meteor")
+            Destroy(this.gameObject);
+    }
 
     public void GodModeOn()
     {
