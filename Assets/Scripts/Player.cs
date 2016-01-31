@@ -16,13 +16,6 @@ public class Player : MonoBehaviour {
 	protected Sprite m_IdleSprite;
     protected Sprite m_AttackSprite;
 
-
-    protected bool m_IsAttacking;
-    protected float m_AnimationTimer;
-	public float m_AnimationLength;
-
-    public Spawner m_Spawner;
-
 	#region Player States
 
 	public bool m_IsInvulnerable;
@@ -33,8 +26,6 @@ public class Player : MonoBehaviour {
 	#region Animation Variables
 	public float m_TransformationLength;
 	#endregion
-
-
 
 	#region Debuffs
 	public enum Debuffs { Stun, Slow }
@@ -180,15 +171,6 @@ public class Player : MonoBehaviour {
 
         UpdateDebuffsAndPowerUps();
 
-		if (m_IsAttacking) {
-			m_AnimationTimer += Time.fixedDeltaTime;
-
-			if (m_AnimationTimer >= m_AnimationLength) {
-				m_IsAttacking = false;
-				GetComponent<SpriteRenderer> ().sprite = m_IdleSprite;
-			}
-		}
-
 		#region Debug Updates
 		m_DebuffTimersKeys = m_DebuffTimers.Keys.ToList ();
 		m_DebuffTimersValues = m_DebuffTimers.Values.ToList ();
@@ -276,76 +258,77 @@ public class Player : MonoBehaviour {
 		{
 			if (weapon.m_IsAttacking)
 			{
-				print (string.Format("weapon {0} hit player {1}", coll.name, name));
-				// if (m_Sacrifice != null) {
-
-					ApplyDebuff (Debuffs.Slow, .1f, 10);
-					// DropSacrifice (transform.position - coll.transform.position);
-				//} else {
-				//	m_SlowTimer = weapon.m_SlowLength;
-				//}
-				//if(m_DebuffTimers[Debuffs.Stun] > 0 || m_DebuffGracePeriodTime > 0) //Prevents Stun-locking
-				//	ApplyDebuff(Debuffs.Stun, 42f, weapon.m_StunLength);
-
+				ApplyDebuff (Debuffs.Slow, .1f, 10);
 
 				if (weapon.IsGodWeapon () && !m_IsInvulnerable) {
-
+                    //Get the angle where the spurt would be away from the god
                     Vector3 fromEnemy = weapon.transform.position - transform.position;
                     var angle = Vector3.Angle(Vector3.up, fromEnemy);
                     angle = fromEnemy.x < 0.0f ? angle : -angle;
 
+                    //rotate the body to face away from the god
                     transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
+                    //start the player death particle
                     GetComponentInChildren<PlayerDeath>().GetComponent<ParticleSystem>().Play();
 
-
-                    Destroy(this.gameObject, 1f);
-                    GetComponent<PlayerMovement>().enabled = false;
-                    GetComponent<Player>().enabled = false;
+                    //Prepare for destruction
+                    Death();
 				}
             }
         }
 
     }
+    
+    /// <summary>
+    /// Should be called when the player needs to be removed for any reason.
+    /// </summary>
+    void Death()
+    {
+        Destroy(this.gameObject, 1f);
+        GetComponent<PlayerMovement>().enabled = false;
+        GetComponent<Player>().enabled = false;
+    }
 
     void OnCollisionEnter2D(Collision2D coll)
     {
         if (coll.gameObject.tag == "Meteor")
-            Destroy(this.gameObject);
+            Death();
     }
 
     public virtual void GodModeOn()
     {
+        //If already in god mode, don't restart the transformation
         if (m_IsInGodMode) return;
 
         m_IsInGodMode = true;
 
         animator.SetTrigger("IsGod");
-
-        m_Spawner.StartSpawningShields();
-
+        //Play transformation particles
         GetComponentInChildren<ParticleSystem>().Play();
 
-        Debug.Log("HELL");
-        //Change Sprite
-        //Activate Animation
+        //Stun the player while transforming
         ApplyDebuff(Debuffs.Stun, 42f, m_TransformationLength);
+
+        //Prevent spawner from spawning while someone is transforming
 		GameObject.Find ("Spawner").GetComponent<Spawner> ().Pause(m_TransformationLength);
 
     }
     public virtual void GodModeOff()
     {
+        //If not already in god mode, don't turn it off
         if (!m_IsInGodMode) return;
+
         m_IsInGodMode = false;
 
 		animator.SetTrigger ("Revert");
-
-        m_Spawner.StopSpawningShields();
-
+        //Player transformation particle
         GetComponentInChildren<ParticleSystem>().Play();
 
-        //Change Sprite
-        //Activate Animation
+        //Stun the player while transforming
         ApplyDebuff(Debuffs.Stun, 42f, m_TransformationLength);
+
+        //Prevent spawner from spawning while someone is transforming
+        GameObject.Find("Spawner").GetComponent<Spawner>().Pause(m_TransformationLength);
     }
 }
