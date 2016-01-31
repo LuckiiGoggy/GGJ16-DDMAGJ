@@ -16,7 +16,6 @@ public class PlayerController : MonoBehaviour {
 
 	void Awake ()
 	{
-
 		// first get the playermovement and playerrotation on THIS script's gameobject
 		_playerMovement_ref = GetComponent<PlayerMovement> ();
 		_playerRotation_ref = GetComponent<PlayerRotation>();
@@ -35,5 +34,7 @@ public class PlayerController : MonoBehaviour {
 		_playerRotation_ref._verticalAxis = InputControllerManager._verticalAxis;
 
 		m_Player.m_Attack = InputControllerManager._button01;
+
+
 	}
 }

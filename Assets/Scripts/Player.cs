@@ -19,6 +19,8 @@ public class Player : MonoBehaviour {
 	private float m_AnimationTimer;
 	public float m_AnimationLength;
 
+    public Spawner m_Spawner;
+
 	#region Player States
 
 	public bool m_IsInvulnerable;
@@ -265,6 +267,9 @@ public class Player : MonoBehaviour {
 					Destroy(this.gameObject); 
             }
         }
+
+        if (coll.tag == "Meteor")
+            Destroy(this.gameObject);
     }
 
 
@@ -274,8 +279,11 @@ public class Player : MonoBehaviour {
 
         m_IsInGodMode = true;
 
-		animator.SetTrigger ("IsGod");
+        animator.SetTrigger("IsGod");
 
+        m_Spawner.StartSpawningShields();
+
+        
         //Change Sprite
         //Activate Animation
         ApplyDebuff(Debuffs.Stun, 42f, m_TransformationLength);
@@ -288,6 +296,8 @@ public class Player : MonoBehaviour {
         m_IsInGodMode = false;
 
 		animator.SetTrigger ("Revert");
+
+        m_Spawner.StopSpawningShields();
 
         //Change Sprite
         //Activate Animation
