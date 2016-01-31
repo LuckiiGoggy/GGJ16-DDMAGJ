@@ -19,6 +19,10 @@ public class Player : MonoBehaviour {
     public List<AudioClip> m_DeathSounds;
     public AudioSource m_AudioSource;
 
+	public float m_GameEndLength;
+	private bool m_GameEnded;
+
+
 
 	#region Player States
 
@@ -84,12 +88,14 @@ public class Player : MonoBehaviour {
 	public void ApplyDebuff(Debuffs debuff, float modifier, float duration)
 	{
 		PlayerMovement control = GetComponent<PlayerMovement>();
+		PlayerRotation rotationController = GetComponent<PlayerRotation>();
 		m_DebuffTimers[debuff] = duration;
 
 		switch (debuff)
 		{
 			case Debuffs.Stun:
-                control.enabled = false;
+				control.enabled = false;
+				rotationController.enabled = false;
                 GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                 m_DebuffGracePeriodTime = m_DebuffGracePeriod + duration;
 				break;
@@ -168,9 +174,21 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+		if (m_GameEnded) {
+			m_GameEndLength -= Time.fixedDeltaTime;
+			if (m_GameEndLength <= 0) {
+				if (Input.GetKeyDown (m_Attack)) {
+					Application.LoadLevel ("StartScene");
+				}
+			}
+			return;
+		}
+
 		if (GameObject.FindGameObjectsWithTag ("Player").Count () <= 1) {
 			Destroy (gameObject.GetComponent<PlayerMovement> ());
+			Destroy (gameObject.GetComponent<PlayerRotation> ());
 			GameObject.Find ("EndGame").GetComponent<EndGame> ().PlayerWins (GameObject.FindGameObjectWithTag ("Player"));
+			m_GameEnded = true;
 		}
 
         UpdateDebuffsAndPowerUps();
@@ -191,6 +209,7 @@ public class Player : MonoBehaviour {
     protected void UpdateDebuffsAndPowerUps()
     {
         PlayerMovement control = gameObject.GetComponent<PlayerMovement>();
+		PlayerRotation rotationController = GetComponent<PlayerRotation>();
 
         foreach (Debuffs debuff in m_DebuffTimers.Keys.ToList())
             m_DebuffTimers[debuff] = Mathf.Max(m_DebuffTimers[debuff] - Time.fixedDeltaTime, 0);
@@ -211,6 +230,7 @@ public class Player : MonoBehaviour {
 		{
 			if (control != null) {
 				control.enabled = true;
+				rotationController.enabled = true;
 			}
 		}
             
