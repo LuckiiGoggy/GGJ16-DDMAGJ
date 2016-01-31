@@ -164,14 +164,14 @@ public class Player : MonoBehaviour {
 
         m_DebuffGracePeriodTime = Mathf.Max(m_DebuffGracePeriodTime - Time.fixedDeltaTime, 0);
 
-		Debug.Log("Before: " + control._fMoveSpeed);
+		//Debug.Log("Before: " + control._fMoveSpeed);
 		if(m_PowerStateTimers[PowerStates.SuperSpeed] == 0 &&
 			m_DebuffTimers[Debuffs.Slow] == 0 &&
 			m_DebuffTimers[Debuffs.Stun] == 0)
 		{
 			control._fMoveSpeed = m_MovementSpeed;
 		}
-		Debug.Log("After: " + control._fMoveSpeed);
+		//Debug.Log("After: " + control._fMoveSpeed);
 
 		if (m_PowerStateTimers[PowerStates.Invulnerability] == 0) m_IsInvulnerable = false;
 
@@ -211,7 +211,7 @@ public class Player : MonoBehaviour {
 	void HandleKeys()
 	{
 		if (Input.GetKeyDown (m_Attack)) {
-			Attack ();
+			GetComponentInChildren<Weapon>().Attack();
 		}
 		#region Debug Keys
 		if (Input.GetKeyDown(m_ForceSlow)) ApplyDebuff(Debuffs.Slow, 0.5f, 5);
@@ -238,7 +238,6 @@ public class Player : MonoBehaviour {
 			{
 				print (string.Format("weapon {0} hit player {1}", coll.name, name));
 				// if (m_Sacrifice != null) {
-					m_StunTimer = weapon.m_StunLength;
 
 					ApplyDebuff (Debuffs.Slow, .1f, 10);
 					// DropSacrifice (transform.position - coll.transform.position);

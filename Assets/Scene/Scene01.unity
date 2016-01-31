@@ -378,9 +378,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccfa487f833132f4f9ed32d1d225cbd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SacrificalItems:
-  - {fileID: 0}
-  PowerUps: []
+  m_SacrificalItems: []
+  m_PowerUps: []
+  m_ChanceForSacrifice: 0
 --- !u!1001 &609686473
 Prefab:
   m_ObjectHideFlags: 0
@@ -1529,6 +1529,10 @@ Prefab:
     - target: {fileID: 181026, guid: a3e8c84fb6ecb464c860e2ad97fc7db7, type: 2}
       propertyPath: m_Name
       value: Spawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 181026, guid: a3e8c84fb6ecb464c860e2ad97fc7db7, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11434914, guid: a3e8c84fb6ecb464c860e2ad97fc7db7, type: 2}
