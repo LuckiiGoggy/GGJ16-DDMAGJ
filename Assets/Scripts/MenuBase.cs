@@ -11,6 +11,17 @@ public class MenuBase : MonoBehaviour {
 	void Update () {
       
     }
+    // load correct level for _menuState
+    public void LoadLevel()
+    {
+        if (_menuState == 0)
+        {
+            return;
+        } else
+        {
+            Application.LoadLevel("Scene01");
+        }
+    }
 }
 
 
