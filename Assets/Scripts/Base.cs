@@ -28,14 +28,17 @@ public class Base : MonoBehaviour {
 
     public void FixedUpdate()
     {
-		if(m_Owner != null && SacrificesCompleted)
+        if (m_Owner != null)
         {
-			m_Owner.GetComponent<Player>().GodModeOn();
-		}
-		else
-		{
-			m_Owner.GetComponent<Player>().GodModeOff();
-		}
+            if (SacrificesCompleted)
+            {
+                m_Owner.GetComponent<Player>().GodModeOn();
+            }
+            else
+            {
+                m_Owner.GetComponent<Player>().GodModeOff();
+            }
+        }
 	}
 
 	public void AddSacrifice(GameObject sacrifice)
