@@ -44,7 +44,7 @@ public class MenuColorer : MonoBehaviour {
         }
         else if (_menuState == 4)
         {
-            updateColor(ConvertColor(255, 97, 71));
+            updateColor(ConvertColor(255, 57, 141));
         }
     }
 
