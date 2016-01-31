@@ -25,6 +25,8 @@ public class AIPlayerMovement : PlayerMovement
     public void moveTowards(float gotoX, float gotoY)
     {
         Transform _transform = GetComponent<Transform>();
+        AIPlayer _aiplayer = GetComponent<AIPlayer>();
+        bool isgodmode = _aiplayer.m_IsInGodMode;
         Vector2 _position = _transform.position;
         float horVar = 0;
         float vertVar = 0;
@@ -37,11 +39,18 @@ public class AIPlayerMovement : PlayerMovement
 
         if (horVar == 0 && vertVar == 0)
         {
+            playerAnimation.animator.SetBool("GodWalk", false);
             playerAnimation.animator.SetBool("Walk", false);
         }
         else
         {
+            if (isgodmode)
+            {
+                playerAnimation.animator.SetBool("GodWalk", true);
+                playerAnimation.animator.SetBool("Walk", false);
+            }
             playerAnimation.animator.SetBool("Walk", true);
+            playerAnimation.animator.SetBool("GodWalk", false);
         }
 
         AIUpdate(horVar, vertVar);
