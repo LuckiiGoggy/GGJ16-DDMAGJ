@@ -8,12 +8,6 @@ public class AIPlayer : Player {
     public float _offset = 0.3f;
     private GameObject m_Sacrifice;
 
-    private Sprite m_IdleSprite;
-    private Sprite m_AttackSprite;
-
-
-    private bool m_IsAttacking;
-    private float m_AnimationTimer;
     #region Power States
 
     public GameObject m_target;
@@ -60,24 +54,46 @@ public class AIPlayer : Player {
             return;
         }
 
-        m_target = FindSacrifice();
-        if (m_target != null)
+
+
+        if (GetComponent<Player>().m_IsInGodMode)
         {
-            getSacrifice();
-        } else
+            FindPlayer();
+            attackPlayer();
+        }
+        else
         {
-            m_target = FindItem();
+            m_target = FindSacrifice();
             if (m_target != null)
             {
                 getSacrifice();
             }
+            else
+            {
+                m_target = FindItem();
+                if (m_target != null)
+                {
+                    getSacrifice();
+                }
+            }
         }
 
-        //attackPlayer();
+    }
+
+    public void FindPlayer()
+    {
+        m_target = GameObject.FindGameObjectWithTag("Player");
+        AIPlayerMovement movement = GetComponent<AIPlayerMovement>();
+        movement.moveTowards(m_target.transform.position.x, m_target.transform.position.y);
     }
 
     public void attackPlayer()
     {
+        if(m_target.tag == "Player")
+        {
+            if((m_target.transform.position-transform.position).magnitude < 5)
+                animator.SetTrigger("Attack");
+        }
         return;
     }
 

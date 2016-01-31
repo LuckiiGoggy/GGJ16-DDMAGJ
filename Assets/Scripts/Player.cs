@@ -6,19 +6,19 @@ using System.Linq;
 public class Player : MonoBehaviour {
 
 	public float m_MovementSpeed;
-	private GameObject m_Sacrifice;
-	private PauseGame m_PauseGame;
+    protected GameObject m_Sacrifice;
+    protected PauseGame m_PauseGame;
 
 	public KeyCode m_DropSacrifice;
 	public KeyCode m_Attack;
 	public KeyCode m_Pause;
 
-	private Sprite m_IdleSprite;
-	private Sprite m_AttackSprite;
+	protected Sprite m_IdleSprite;
+    protected Sprite m_AttackSprite;
 
 
-	private bool m_IsAttacking;
-	private float m_AnimationTimer;
+    protected bool m_IsAttacking;
+    protected float m_AnimationTimer;
 	public float m_AnimationLength;
 
     public Spawner m_Spawner;
@@ -95,6 +95,7 @@ public class Player : MonoBehaviour {
 		{
 			case Debuffs.Stun:
                 control.enabled = false;
+                GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                 m_DebuffGracePeriodTime = m_DebuffGracePeriod + duration;
 				break;
 			case Debuffs.Slow:
@@ -177,33 +178,7 @@ public class Player : MonoBehaviour {
 			GameObject.Find ("EndGame").GetComponent<EndGame> ().PlayerWins (GameObject.FindGameObjectWithTag ("Player"));
 		}
 
-		PlayerMovement control = gameObject.GetComponent<PlayerMovement> ();
-
-		foreach (Debuffs debuff in m_DebuffTimers.Keys.ToList())
-			m_DebuffTimers [debuff] = Mathf.Max (m_DebuffTimers [debuff] - Time.fixedDeltaTime, 0);
-		foreach (PowerStates powerState in m_PowerStateTimers.Keys.ToList())
-			m_PowerStateTimers [powerState] = Mathf.Max (m_PowerStateTimers [powerState] - Time.fixedDeltaTime, 0);
-
-		m_DebuffGracePeriodTime = Mathf.Max (m_DebuffGracePeriodTime - Time.fixedDeltaTime, 0);
-
-		//Debug.Log("Before: " + control._fMoveSpeed);
-		if (m_PowerStateTimers [PowerStates.SuperSpeed] == 0 &&
-		   m_DebuffTimers [Debuffs.Slow] == 0) {
-			control._fMoveSpeed = m_MovementSpeed;
-		}
-
-		if (m_DebuffTimers [Debuffs.Stun] == 0)
-			control.enabled = true;
-
-
-
-		//Debug.Log("After: " + control._fMoveSpeed);
-
-		if (m_PowerStateTimers [PowerStates.Invulnerability] == 0) {
-			m_IsInvulnerable = false;
-			GetComponentInChildren<Shield> ().GetComponent<SpriteRenderer> ().enabled = false;
-            
-		}
+        UpdateDebuffsAndPowerUps();
 
 		if (m_IsAttacking) {
 			m_AnimationTimer += Time.fixedDeltaTime;
@@ -227,12 +202,49 @@ public class Player : MonoBehaviour {
 		HandleKeys();
 	}
 
+    protected void UpdateDebuffsAndPowerUps()
+    {
+        PlayerMovement control = gameObject.GetComponent<PlayerMovement>();
+
+        foreach (Debuffs debuff in m_DebuffTimers.Keys.ToList())
+            m_DebuffTimers[debuff] = Mathf.Max(m_DebuffTimers[debuff] - Time.fixedDeltaTime, 0);
+        foreach (PowerStates powerState in m_PowerStateTimers.Keys.ToList())
+            m_PowerStateTimers[powerState] = Mathf.Max(m_PowerStateTimers[powerState] - Time.fixedDeltaTime, 0);
+
+        m_DebuffGracePeriodTime = Mathf.Max(m_DebuffGracePeriodTime - Time.fixedDeltaTime, 0);
+
+        //Debug.Log("Before: " + control._fMoveSpeed);
+        if (m_PowerStateTimers[PowerStates.SuperSpeed] == 0 &&
+           m_DebuffTimers[Debuffs.Slow] == 0)
+        {
+            control._fMoveSpeed = m_MovementSpeed;
+        }
+
+        if (m_DebuffTimers[Debuffs.Stun] == 0)
+            control.enabled = true;
+
+
+
+        //Debug.Log("After: " + control._fMoveSpeed);
+
+        if (m_PowerStateTimers[PowerStates.Invulnerability] == 0)
+        {
+            m_IsInvulnerable = false;
+            GetComponentInChildren<Shield>().GetComponent<SpriteRenderer>().enabled = false;
+
+        }
+    }
+
 	private void CheckStates()
 	{
 		if (m_IsInGodMode)
 		{
 			GetComponentInChildren<Weapon>().SetGodWeapon();
-		}
+        }
+        else
+        {
+            GetComponentInChildren<Weapon>().ReverseGodWeapon();
+        }
 
 	}
 
@@ -277,7 +289,19 @@ public class Player : MonoBehaviour {
 
 
 				if (weapon.IsGodWeapon () && !m_IsInvulnerable) {
-					Destroy (this.gameObject); 
+
+                    Vector3 fromEnemy = weapon.transform.position - transform.position;
+                    var angle = Vector3.Angle(Vector3.up, fromEnemy);
+                    angle = fromEnemy.x < 0.0f ? angle : -angle;
+
+                    transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+                    GetComponentInChildren<PlayerDeath>().GetComponent<ParticleSystem>().Play();
+
+
+                    Destroy(this.gameObject, 1f);
+                    GetComponent<PlayerMovement>().enabled = false;
+                    GetComponent<Player>().enabled = false;
 				}
             }
         }
@@ -290,7 +314,7 @@ public class Player : MonoBehaviour {
             Destroy(this.gameObject);
     }
 
-    public void GodModeOn()
+    public virtual void GodModeOn()
     {
         if (m_IsInGodMode) return;
 
@@ -302,14 +326,14 @@ public class Player : MonoBehaviour {
 
         GetComponentInChildren<ParticleSystem>().Play();
 
-        
+        Debug.Log("HELL");
         //Change Sprite
         //Activate Animation
         ApplyDebuff(Debuffs.Stun, 42f, m_TransformationLength);
 		GameObject.Find ("Spawner").GetComponent<Spawner> ().Pause(m_TransformationLength);
 
     }
-    public void GodModeOff()
+    public virtual void GodModeOff()
     {
         if (!m_IsInGodMode) return;
         m_IsInGodMode = false;
@@ -317,6 +341,8 @@ public class Player : MonoBehaviour {
 		animator.SetTrigger ("Revert");
 
         m_Spawner.StopSpawningShields();
+
+        GetComponentInChildren<ParticleSystem>().Play();
 
         //Change Sprite
         //Activate Animation

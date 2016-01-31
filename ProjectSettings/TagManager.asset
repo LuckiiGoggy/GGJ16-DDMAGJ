@@ -8,6 +8,8 @@ TagManager:
   - Item
   - Shield
   - Meteor
+  - AI
+  - DeathSpurt
   layers:
   - Default
   - TransparentFX

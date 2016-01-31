@@ -34,7 +34,7 @@ public class StartGameCountdown : MonoBehaviour {
 		playerMovement3.enabled = false;
 
 		player4.enabled = false;
-		playerMovement4.enabled = false;
+		//playerMovement4.enabled = false;
 
 		StartCoroutine (StartGameDelay ());
 	}
