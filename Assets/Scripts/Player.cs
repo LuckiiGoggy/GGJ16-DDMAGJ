@@ -75,7 +75,7 @@ public class Player : MonoBehaviour {
 				break;
 			case PowerStates.Invulnerability:
 				m_IsInvulnerable = true;
-                GetComponentInChildren<Shield>().GetComponent<SpriteRenderer>().hideFlags = HideFlags.None;
+                GetComponentInChildren<Shield>().GetComponent<SpriteRenderer>().enabled = true;
 				break;
 			default:
 				break;
@@ -180,7 +180,12 @@ public class Player : MonoBehaviour {
 
 		//Debug.Log("After: " + control._fMoveSpeed);
 
-		if (m_PowerStateTimers[PowerStates.Invulnerability] == 0) m_IsInvulnerable = false;
+        if (m_PowerStateTimers[PowerStates.Invulnerability] == 0)
+        {
+            m_IsInvulnerable = false;
+            GetComponentInChildren<Shield>().GetComponent<SpriteRenderer>().enabled = false;
+            
+        }
 
 		if (m_IsAttacking)
 		{
@@ -256,8 +261,13 @@ public class Player : MonoBehaviour {
 				//	ApplyDebuff(Debuffs.Stun, 42f, weapon.m_StunLength);
 
 
-				if (weapon.IsGodWeapon() && !m_IsInvulnerable) 
-					Destroy(this.gameObject); 
+				if (weapon.IsGodWeapon () && !m_IsInvulnerable) {
+					Destroy (this.gameObject); 
+					if (GameObject.FindGameObjectsWithTag ("Player").Count () == 1) {
+						Destroy (gameObject.GetComponent<PlayerMovement> ());
+						// GameObject.Find ("GameEnd").GetComponent<GameEnd>().PlayerWins (GameObject.FindGameObjectWithTag ("Player"));
+					}
+				}
             }
         }
     }
