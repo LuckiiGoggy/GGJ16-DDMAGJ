@@ -19,12 +19,14 @@ public class Meteor : MonoBehaviour
 
         collider = GetComponent<CircleCollider2D>();
         StartCoroutine(EnableColliderAfterTime());
+        //m_timeToChangeSize = 0;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        transform.localScale = Vector2.Lerp(transform.localScale, toBeSize, m_timeToChangeSize);
+        m_timeToChangeSize-=Time.fixedDeltaTime;
+        transform.localScale = Vector2.Lerp(transform.localScale, toBeSize, -m_timeToChangeSize);
     }
 
     IEnumerator EnableColliderAfterTime()
