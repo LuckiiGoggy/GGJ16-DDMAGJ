@@ -75,6 +75,7 @@ public class Player : MonoBehaviour {
 				break;
 			case PowerStates.Invulnerability:
 				m_IsInvulnerable = true;
+                GetComponentInChildren<Shield>().GetComponent<SpriteRenderer>().hideFlags = HideFlags.None;
 				break;
 			default:
 				break;

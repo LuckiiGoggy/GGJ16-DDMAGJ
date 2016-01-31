@@ -484,9 +484,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccfa487f833132f4f9ed32d1d225cbd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SacrificalItems: []
-  m_PowerUps: []
-  m_ChanceForSacrifice: 0
+  m_SacrificalItems:
+  - {fileID: 459684, guid: 07668fbff7461bb42ab784114a000a1d, type: 2}
+  - {fileID: 454416, guid: c3df2a94d9b2cd74e8e59e7a8f7c186c, type: 2}
+  - {fileID: 402668, guid: 6f4b0dc3197b4a74192fa555cee67559, type: 2}
+  m_PowerUps:
+  - {fileID: 422666, guid: 350c8271268df8b45ab8b29ec1ce614f, type: 2}
+  - {fileID: 430434, guid: 1f5065b0498564247b423e89211353fc, type: 2}
+  m_ChanceForSacrifice: 10
 --- !u!1001 &609686473
 Prefab:
   m_ObjectHideFlags: 0

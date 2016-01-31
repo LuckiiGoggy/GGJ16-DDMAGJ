@@ -38,7 +38,8 @@ public class Spawner : MonoBehaviour {
 
 	public void Spawn()
     {
-		if (Random.value <= m_ChanceForSacrifice)
+        print("Spawning ");
+		if (Random.value * 100 <= m_ChanceForSacrifice)
 		{
 			Instantiate(m_SacrificalItems[Random.Range(0, m_SacrificalItems.Count)]);
 		}
