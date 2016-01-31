@@ -4,25 +4,21 @@ using System.Collections;
 public class Base : MonoBehaviour {
 
     public int m_RequiredSacrifices;
-    private int m_CurrentSacrificeCount;
+    public int m_CurrentSacrificeCount;
 
-	public string m_OwnerName;
-	private GameObject m_Owner;
+	public Player m_Owner;
 
-    public void Start()
-    {
-		m_Owner = GameObject.Find (m_OwnerName);
-    }
 
     public void FixedUpdate()
     {
         if(m_CurrentSacrificeCount >= m_RequiredSacrifices)
         {
+            Debug.Log("Enough Sacrifices");
 			m_Owner.GetComponent<Player>().GodModeOn();
         }
         else
         {
-			//m_Owner.GetComponent<Player>().GodModeOff();
+			m_Owner.GetComponent<Player>().GodModeOff();
         }
     }
 

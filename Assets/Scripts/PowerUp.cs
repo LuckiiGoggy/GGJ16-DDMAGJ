@@ -26,10 +26,11 @@ public class PowerUp : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D coll)
     {
-        Player player = coll.GetComponent<Player>();
-        if(player != null)
+        Base playerBase = coll.GetComponent<Base>();
+        if (playerBase != null)
         {
-            player.GetType().GetField("myVar").GetValue(player);
+            playerBase.m_Owner.ApplyPowerUp(m_TargetPlayerPowerStates, m_Modifier, m_Duration);
+            Destroy(this.gameObject);
         }
 
     }
