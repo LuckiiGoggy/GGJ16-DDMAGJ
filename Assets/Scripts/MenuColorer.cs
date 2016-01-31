@@ -6,8 +6,10 @@ public class MenuColorer : MonoBehaviour {
     public bool noLight;
     public bool fire;
     public bool credits;
-	// Use this for initialization
-	void Start () {
+    public bool credits2;
+
+    // Use this for initialization
+    void Start () {
 	
 	}
 
@@ -25,6 +27,17 @@ public class MenuColorer : MonoBehaviour {
             }
             else {
                 updateColor(ConvertColor(255, 255, 255));
+            }
+        }
+
+        if (credits2)
+        {
+            if (_menuState == -1)
+            {
+                updateColor(ConvertColor(255, 255, 255));
+            }
+            else {
+                updateColor(ConvertColor(255, 255, 255, 0));
             }
         }
 
