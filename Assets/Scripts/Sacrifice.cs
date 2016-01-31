@@ -2,9 +2,9 @@
 using System.Collections;
 
 public enum SacrificeType {
-	Lamb,
-	Chicken,
-	Totem
+	Lamb = 0,
+	Chicken = 1,
+	Totem = 2
 }
 
 public class Sacrifice : MonoBehaviour {
@@ -12,6 +12,7 @@ public class Sacrifice : MonoBehaviour {
 
 	private GameObject m_Owner;
 	private SacrificeType m_SacrificeType;
+	public SacrificeType SacrificeType { get { return m_SacrificeType; } }
 
 
 	public void Respawn() {

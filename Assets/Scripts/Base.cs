@@ -1,21 +1,35 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Base : MonoBehaviour {
-
-	public int m_RequiredSacrifices;
-	public int m_CurrentSacrificeCount;
+	
+	public Player m_Owner;
+	public bool SacrificesCompleted { 
+		get { 
+			bool result = true;
+			foreach (bool completed in m_Completed) {
+				result = completed;
+			}
+			return result;
+		}
+	}
+			
 
     public Spawner m_Spawner;
+	private bool[] m_Completed;
 
-	public Player m_Owner;
 
-
-	public void FixedUpdate()
+	void Start()
 	{
-		if(m_CurrentSacrificeCount >= m_RequiredSacrifices)
-		{
-			Debug.Log("Enough Sacrifices");
+		m_Completed = new bool[3];
+	}
+
+
+    public void FixedUpdate()
+    {
+		if(SacrificesCompleted)
+        {
 			m_Owner.GetComponent<Player>().GodModeOn();
 		}
 		else
@@ -26,8 +40,9 @@ public class Base : MonoBehaviour {
 
 	public void AddSacrifice(GameObject sacrifice)
 	{
-		m_CurrentSacrificeCount += m_RequiredSacrifices;
 		m_Spawner.Spawn();
+
+		m_Completed[(int) sacrifice.GetComponent<Sacrifice>().SacrificeType] = true;
 		Destroy (sacrifice);
 
 	}
