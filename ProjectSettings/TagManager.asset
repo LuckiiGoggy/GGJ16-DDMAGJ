@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Sacrifice
   - Item
+  - Shield
   layers:
   - Default
   - TransparentFX
