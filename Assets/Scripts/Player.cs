@@ -50,6 +50,7 @@ public class Player : MonoBehaviour {
 
 	#region Power States
 
+	private Animator animator;
 	/// <summary>
 	/// The different power state variables the player has
 	/// </summary>
@@ -148,10 +149,12 @@ public class Player : MonoBehaviour {
 		PlayerMovement control = gameObject.GetComponent<PlayerMovement>();
 		control._fMoveSpeed = m_MovementSpeed;
 
+		animator = GetComponent<Animator> ();
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+
 		PlayerMovement control = gameObject.GetComponent<PlayerMovement>();
 
 		foreach (Debuffs debuff in m_DebuffTimers.Keys.ToList()) 
@@ -161,14 +164,14 @@ public class Player : MonoBehaviour {
 
         m_DebuffGracePeriodTime = Mathf.Max(m_DebuffGracePeriodTime - Time.fixedDeltaTime, 0);
 
-		Debug.Log("Before: " + control._fMoveSpeed);
+		//Debug.Log("Before: " + control._fMoveSpeed);
 		if(m_PowerStateTimers[PowerStates.SuperSpeed] == 0 &&
 			m_DebuffTimers[Debuffs.Slow] == 0 &&
 			m_DebuffTimers[Debuffs.Stun] == 0)
 		{
 			control._fMoveSpeed = m_MovementSpeed;
 		}
-		Debug.Log("After: " + control._fMoveSpeed);
+		//Debug.Log("After: " + control._fMoveSpeed);
 
 		if (m_PowerStateTimers[PowerStates.Invulnerability] == 0) m_IsInvulnerable = false;
 
@@ -208,7 +211,7 @@ public class Player : MonoBehaviour {
 	void HandleKeys()
 	{
 		if (Input.GetKeyDown (m_Attack)) {
-			Attack ();
+			GetComponentInChildren<Weapon>().Attack();
 		}
 		#region Debug Keys
 		if (Input.GetKeyDown(m_ForceSlow)) ApplyDebuff(Debuffs.Slow, 0.5f, 5);
@@ -234,26 +237,22 @@ public class Player : MonoBehaviour {
 			if (weapon.m_IsAttacking)
 			{
 				print (string.Format("weapon {0} hit player {1}", coll.name, name));
-				
-                if(m_DebuffTimers[Debuffs.Stun] > 0 || m_DebuffGracePeriodTime > 0) //Prevents Stun-locking
-                    ApplyDebuff(Debuffs.Stun, 42f, weapon.m_StunLength);
-                
+				// if (m_Sacrifice != null) {
+
+					ApplyDebuff (Debuffs.Slow, .1f, 10);
+					// DropSacrifice (transform.position - coll.transform.position);
+				//} else {
+				//	m_SlowTimer = weapon.m_SlowLength;
+				//}
+				//if(m_DebuffTimers[Debuffs.Stun] > 0 || m_DebuffGracePeriodTime > 0) //Prevents Stun-locking
+				//	ApplyDebuff(Debuffs.Stun, 42f, weapon.m_StunLength);
+
 
 				if (weapon.IsGodWeapon() && !m_IsInvulnerable) 
-                    Destroy(this.gameObject); 
-			}
-		}
-	}
-
-	void Attack()
-	{
-		if(!m_IsAttacking)
-		{
-			m_IsAttacking = true;
-			m_AnimationTimer = 0;
-			GetComponent<SpriteRenderer> ().sprite = m_AttackSprite;
-		}
-	}
+					Destroy(this.gameObject); 
+            }
+        }
+    }
 
 	void OnCollisionEnter2D(Collision2D coll)
 	{
@@ -265,23 +264,28 @@ public class Player : MonoBehaviour {
 		} */
 	}
 
-	public void GodModeOn()
-	{
-		if (m_IsInGodMode) return;
 
-		m_IsInGodMode = true;
+    public void GodModeOn()
+    {
+        if (m_IsInGodMode) return;
 
-		//Change Sprite
-		//Activate Animation
-		ApplyDebuff(Debuffs.Stun, 42f, m_TransformationLength);
-	}
-	public void GodModeOff()
-	{
-		if (!m_IsInGodMode) return;
-		m_IsInGodMode = false;
+        m_IsInGodMode = true;
 
-		//Change Sprite
-		//Activate Animation
-		ApplyDebuff(Debuffs.Stun, 42f, m_TransformationLength);
-	}
+		animator.SetTrigger ("IsGod");
+
+        //Change Sprite
+        //Activate Animation
+        ApplyDebuff(Debuffs.Stun, 42f, m_TransformationLength);
+    }
+    public void GodModeOff()
+    {
+        if (!m_IsInGodMode) return;
+        m_IsInGodMode = false;
+
+		animator.SetTrigger ("Revert");
+
+        //Change Sprite
+        //Activate Animation
+        ApplyDebuff(Debuffs.Stun, 42f, m_TransformationLength);
+    }
 }
