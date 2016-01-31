@@ -69,12 +69,12 @@ public class Base : MonoBehaviour {
 
 	void ActivateRespectiveTotem ()
 	{
-		if (m_Completed [0] == true) 
+		if (m_Completed [1] == true) 
 		{
 			bottomTotem_deactivated.SetActive (false);
 			bottomTotem_activated.SetActive (true);
 		}
-		if (m_Completed [1] == true) 
+		if (m_Completed [0] == true) 
 		{
 			middleTotem_deactivated.SetActive (false);
 			middleTotem_activated.SetActive (true);
