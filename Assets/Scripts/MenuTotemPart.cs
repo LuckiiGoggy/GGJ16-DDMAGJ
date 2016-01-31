@@ -23,7 +23,7 @@ public class MenuTotemPart : MonoBehaviour {
         }
     }
 
-    void OnMouseOver()
+    public void OnMouseOver()
     {
         _menuBase._menuState = level;
         Animator animator = GetComponent<Animator>();

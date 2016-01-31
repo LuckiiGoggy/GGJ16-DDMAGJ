@@ -27,6 +27,7 @@ public class StartGameCountdown : MonoBehaviour {
 		player1.enabled = false;
 		playerMovement1.enabled = false;
 
+
 		player2.enabled = false;
 		playerMovement2.enabled = false;
 
