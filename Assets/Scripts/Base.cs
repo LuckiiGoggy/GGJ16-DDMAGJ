@@ -28,7 +28,7 @@ public class Base : MonoBehaviour {
 
     public void FixedUpdate()
     {
-		if(SacrificesCompleted)
+		if(m_Owner != null && SacrificesCompleted)
         {
 			m_Owner.GetComponent<Player>().GodModeOn();
 		}
