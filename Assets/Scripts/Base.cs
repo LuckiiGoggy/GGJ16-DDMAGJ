@@ -17,6 +17,13 @@ public class Base : MonoBehaviour {
     public Spawner m_Spawner;
 	private bool[] m_Completed;
 
+	public GameObject bottomTotem_deactivated;
+	public GameObject middleTotem_deactivated;
+	public GameObject topTotem_deactivated;
+
+	public GameObject bottomTotem_activated;
+	public GameObject middleTotem_activated;
+	public GameObject topTotem_activated;
 
 	void Start()
 	{
@@ -49,6 +56,47 @@ public class Base : MonoBehaviour {
 		if (!SacrificesCompleted) {
 			m_Spawner.Spawn();
 		}
+
+		if (SacrificesCompleted) 
+		{
+			ResetTotems ();
+		}
+		else 
+		{
+			ActivateRespectiveTotem ();
+		}
+	}
+
+	void ActivateRespectiveTotem ()
+	{
+		if (m_Completed [1] == true) 
+		{
+			bottomTotem_deactivated.SetActive (false);
+			bottomTotem_activated.SetActive (true);
+		}
+		if (m_Completed [0] == true) 
+		{
+			middleTotem_deactivated.SetActive (false);
+			middleTotem_activated.SetActive (true);
+		}
+		if (m_Completed [2] == true) 
+		{
+			topTotem_deactivated.SetActive (false);
+			topTotem_activated.SetActive (true);
+		}
+	}
+
+	void ResetTotems ()
+	{
+		bottomTotem_deactivated.SetActive (true);
+		bottomTotem_activated.SetActive (false);
+		middleTotem_deactivated.SetActive (true);
+		middleTotem_activated.SetActive (false);
+		topTotem_deactivated.SetActive (true);
+		topTotem_activated.SetActive (false);
+
+		m_Owner.GetComponent<Player>().GodModeOff();
+		m_Owner.GetComponentInChildren<Weapon>().m_IsGodWeapon = false;
 	}
 
 	public void RemoveSacrifice(GameObject sacrifice)

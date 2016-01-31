@@ -203,8 +203,13 @@ public class Player : MonoBehaviour {
                 control._fMoveSpeed = m_MovementSpeed;
         }
 
-        if (m_DebuffTimers[Debuffs.Stun] == 0)
-            control.enabled = true;
+		if (m_DebuffTimers [Debuffs.Stun] == 0) 
+		{
+			if (control != null) {
+				control.enabled = true;
+			}
+		}
+            
 
 
 
@@ -237,7 +242,7 @@ public class Player : MonoBehaviour {
 			GetComponentInChildren<Weapon>().Attack();
 		}
 		#region Debug Keys
-		if (Input.GetKeyDown(m_ForceSlow)) ApplyDebuff(Debuffs.Slow, 0.5f, 5);
+		//if (Input.GetKeyDown(m_ForceSlow)) );
 		/*if (Input.GetKeyDown(m_DropSacrifice)) {
 			DropSacrifice(new Vector3(10, 10, 0));
 		}*/
@@ -259,7 +264,7 @@ public class Player : MonoBehaviour {
 		{
 			if (weapon.m_IsAttacking)
 			{
-				ApplyDebuff (Debuffs.Slow, .1f, 10);
+				ApplyDebuff (Debuffs.Slow, 0.5f, GetComponentInChildren<Weapon> ().m_SlowLength);
 
 				if (weapon.IsGodWeapon () && !m_IsInvulnerable) {
                     //Get the angle where the spurt would be away from the god
@@ -308,6 +313,8 @@ public class Player : MonoBehaviour {
         //Play transformation particles
         GetComponentInChildren<ParticleSystem>().Play();
 
+		ApplyDebuff(Debuffs.Slow, 0.5f, float.MaxValue);
+
         //Stun the player while transforming
         ApplyDebuff(Debuffs.Stun, 42f, m_TransformationLength);
 
@@ -325,6 +332,8 @@ public class Player : MonoBehaviour {
 		animator.SetTrigger ("Revert");
         //Player transformation particle
         GetComponentInChildren<ParticleSystem>().Play();
+
+		ApplyDebuff(Debuffs.Slow, 1, 0.1f);
 
         //Stun the player while transforming
         ApplyDebuff(Debuffs.Stun, 42f, m_TransformationLength);
