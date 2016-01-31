@@ -74,7 +74,7 @@ ParticleSystem:
     minMaxState: 0
   speed: 1
   randomSeed: 0
-  looping: 0
+  looping: 1
   prewarm: 0
   playOnAwake: 0
   moveWithTransform: 1
@@ -242,16 +242,11 @@ ParticleSystem:
         rgba: 4294967295
       minMaxState: 0
     startSize:
-      scalar: 1
+      scalar: 2
       maxCurve:
         serializedVersion: 2
         m_Curve:
         - time: 0
-          value: 0.7702703
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
-        - time: 0.99512184
           value: 1
           inSlope: 0
           outSlope: 0
@@ -263,12 +258,12 @@ ParticleSystem:
         serializedVersion: 2
         m_Curve:
         - time: 0
-          value: 0
+          value: 0.54054046
           inSlope: 0
           outSlope: 0
           tangentMode: 0
         - time: 1
-          value: 0.027027024
+          value: 1
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -1524,7 +1519,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_RenderMode: 4
+  m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
   m_MaxParticleSize: 0.5
