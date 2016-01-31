@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class MenuTotemPart : MonoBehaviour {
@@ -23,11 +24,15 @@ public class MenuTotemPart : MonoBehaviour {
         }
     }
 
+	public void ActivateTotemPart() {
+		_menuBase._menuState = level;
+		Animator animator = GetComponent<Animator> ();
+		animator.SetBool ("isActive", true);
+	}
+
     void OnMouseOver()
     {
-        _menuBase._menuState = level;
-        Animator animator = GetComponent<Animator>();
-        animator.SetBool("isActive", true);
+		ActivateTotemPart ();
     }
 
     void OnMouseExit()
@@ -42,6 +47,6 @@ public class MenuTotemPart : MonoBehaviour {
     
     void OnMouseDown()
     {
-        Application.LoadLevel("Scene01");
+        _menuBase.LoadLevel();
     }
 }
