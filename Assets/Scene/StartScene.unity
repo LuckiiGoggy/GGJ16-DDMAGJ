@@ -97,6 +97,11 @@ GameObject:
   - 114: {fileID: 86289569}
   - 114: {fileID: 86289568}
   - 95: {fileID: 86289570}
+  - 114: {fileID: 86289571}
+  - 114: {fileID: 86289574}
+  - 114: {fileID: 86289573}
+  - 114: {fileID: 86289572}
+  - 114: {fileID: 86289575}
   m_Layer: 0
   m_Name: menu_base
   m_TagString: Untagged
@@ -189,6 +194,71 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &86289571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 86289565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69f8b654b55b63f42ab53f6a55705e99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _iControllerNumber: 0
+  m_isAxisInUse: 0
+--- !u!114 &86289572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 86289565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69f8b654b55b63f42ab53f6a55705e99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _iControllerNumber: 4
+  m_isAxisInUse: 0
+--- !u!114 &86289573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 86289565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69f8b654b55b63f42ab53f6a55705e99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _iControllerNumber: 3
+  m_isAxisInUse: 0
+--- !u!114 &86289574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 86289565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69f8b654b55b63f42ab53f6a55705e99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _iControllerNumber: 2
+  m_isAxisInUse: 0
+--- !u!114 &86289575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 86289565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69f8b654b55b63f42ab53f6a55705e99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _iControllerNumber: 1
+  m_isAxisInUse: 0
 --- !u!1 &122809024
 GameObject:
   m_ObjectHideFlags: 0
