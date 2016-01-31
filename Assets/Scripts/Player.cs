@@ -214,11 +214,12 @@ public class Player : MonoBehaviour {
 
 	private void CheckStates()
 	{
-		if (m_IsInGodMode)
+		if (m_IsInGodMode) {
+			GetComponentInChildren<Weapon> ().SetGodWeapon ();
+		} else 
 		{
-			GetComponentInChildren<Weapon>().SetGodWeapon();
+			GetComponentInChildren<Weapon> ().ReverseGodWeapon ();
 		}
-
 	}
 
 	void HandleKeys()
