@@ -26,14 +26,17 @@ public class Base : MonoBehaviour {
 
     public void FixedUpdate()
     {
-		if(m_Owner != null && SacrificesCompleted)
+        if (m_Owner != null)
         {
-			m_Owner.GetComponent<Player>().GodModeOn();
-		}
-		else
-		{
-			m_Owner.GetComponent<Player>().GodModeOff();
-		}
+            if (SacrificesCompleted)
+            {
+                m_Owner.GetComponent<Player>().GodModeOn();
+            }
+            else
+            {
+                m_Owner.GetComponent<Player>().GodModeOff();
+            }
+        }
 	}
 
 	public void AddSacrifice(GameObject sacrifice)
@@ -44,7 +47,13 @@ public class Base : MonoBehaviour {
 		if (!SacrificesCompleted) {
 			m_Spawner.Spawn();
 		}
+	}
 
+	public void RemoveSacrifice(GameObject sacrifice)
+	{
+		m_Completed[(int) sacrifice.GetComponent<Sacrifice>().m_SacrificeType] = false;
+		Destroy (sacrifice);
+		m_Spawner.Spawn();
 	}
 
 	void OnTriggerEnter2D(Collider2D coll)
@@ -53,7 +62,10 @@ public class Base : MonoBehaviour {
             m_Spawner.Spawn();
 
 		else if (coll.gameObject.tag == "Sacrifice") {
-			AddSacrifice (coll.gameObject);
+			if (!SacrificesCompleted)
+				AddSacrifice (coll.gameObject);
+			else
+				RemoveSacrifice (coll.gameObject);
 		}
 
 	}
