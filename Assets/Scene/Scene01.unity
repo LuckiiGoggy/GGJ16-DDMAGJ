@@ -2240,8 +2240,6 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-<<<<<<< HEAD
-=======
 --- !u!1001 &1050871280
 Prefab:
   m_ObjectHideFlags: 0
@@ -2337,7 +2335,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ad00e86f379d3f249938f925aae101d1, type: 2}
   m_IsPrefabParent: 0
->>>>>>> 0a18809d47e78fbf7b1e7ff132ab7ba9661cb820
 --- !u!1 &1085500811
 GameObject:
   m_ObjectHideFlags: 0
