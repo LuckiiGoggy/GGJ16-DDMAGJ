@@ -11,6 +11,7 @@ GameObject:
   - 114: {fileID: 11434914}
   - 61: {fileID: 6175564}
   - 50: {fileID: 5066464}
+  - 82: {fileID: 8243666}
   m_Layer: 0
   m_Name: Base
   m_TagString: Untagged
@@ -61,6 +62,80 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 6.84, y: 6.84}
+--- !u!82 &8243666
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 181026}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!114 &11434914
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -72,8 +147,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcd3047dce724c747afaf37789b5acda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_RequiredSacrifices: 1
-  m_OwnerName: Player1
+  m_Owner: {fileID: 0}
+  m_BaseInvulnerableLength: 0
+  m_BaseCompleteSFX: {fileID: 8300000, guid: bf89bf91f422563429bb58eb3711a880, type: 3}
+  m_ItemGetSFX: {fileID: 0}
+  m_Spawner: {fileID: 0}
+  bottomTotem_deactivated: {fileID: 0}
+  middleTotem_deactivated: {fileID: 0}
+  topTotem_deactivated: {fileID: 0}
+  bottomTotem_activated: {fileID: 0}
+  middleTotem_activated: {fileID: 0}
+  topTotem_activated: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -85,6 +169,22 @@ Prefab:
       propertyPath: Player
       value: 
       objectReference: {fileID: 165196, guid: 9f8222a3704888b4a845ce98ad7a19a6, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_BaseCompleteSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: bf89bf91f422563429bb58eb3711a880, type: 3}
+    - target: {fileID: 0}
+      propertyPath: panLevelCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: reverbZoneMixCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Pitch
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 181026}

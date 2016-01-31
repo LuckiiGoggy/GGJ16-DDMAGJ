@@ -14,7 +14,10 @@ public class Player : MonoBehaviour {
 	public KeyCode m_Pause;
 
 	protected Sprite m_IdleSprite;
-    protected Sprite m_AttackSprite;
+
+    public List<AudioClip> m_DeathSounds;
+    public AudioSource m_AudioSource;
+
 
 	#region Player States
 
@@ -134,7 +137,6 @@ public class Player : MonoBehaviour {
 	void Start () {
 		m_PauseGame = GameObject.Find ("PauseGame").GetComponent<PauseGame> ();
 		m_IdleSprite = GetComponent<SpriteRenderer> ().sprite;
-		m_AttackSprite = Resources.Load("battingv1", typeof(Sprite)) as Sprite;
 
 		m_DebuffTimers = new Dictionary<Debuffs, float>();
 		m_PowerStateTimers = new Dictionary<PowerStates, float>();
@@ -293,8 +295,9 @@ public class Player : MonoBehaviour {
     {
         Destroy(this.gameObject, 1f);
 		if (GetComponent<PlayerMovement> ()) {
-			GetComponent<PlayerMovement>().enabled = false;
+			GetComponent<PlayerMovement> ().enabled = false;
 		}
+        m_AudioSource.PlayOneShot(m_DeathSounds[Random.Range(0, m_DeathSounds.Count)]);
         
         //GetComponent<Player>().enabled = false;
     }
