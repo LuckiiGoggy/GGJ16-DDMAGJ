@@ -13,6 +13,14 @@ public class Player : MonoBehaviour {
     public KeyCode m_DropSacrifice;
     public KeyCode m_Attack;
 
+	private Sprite m_IdleSprite;
+	private Sprite m_AttackSprite;
+
+
+	private bool m_IsAttacking;
+	private float m_AnimationTimer;
+	public float m_AnimationLength;
+
     #region Player States
 
     public bool m_IsInvulnerable;
@@ -125,6 +133,9 @@ public class Player : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		m_IdleSprite = GetComponent<SpriteRenderer> ().sprite;
+		m_AttackSprite = Resources.Load("battingv1", typeof(Sprite)) as Sprite;
+
         m_DebuffTimers = new Dictionary<Debuffs, float>();
         m_PowerStateTimers = new Dictionary<PowerStates, float>();
 
@@ -155,6 +166,17 @@ public class Player : MonoBehaviour {
 
         if (m_PowerStateTimers[PowerStates.Invulnerability] == 0) m_IsInvulnerable = false;
 
+		if (m_IsAttacking)
+		{
+			m_AnimationTimer += Time.fixedDeltaTime;
+
+			if(m_AnimationTimer >= m_AnimationLength)
+			{
+				m_IsAttacking = false;
+				GetComponent<SpriteRenderer> ().sprite = m_IdleSprite;
+			}
+		}
+
         #region Debug Updates
         m_DebuffTimersKeys = m_DebuffTimers.Keys.ToList();
         m_DebuffTimersValues = m_DebuffTimers.Values.ToList();
@@ -179,10 +201,9 @@ public class Player : MonoBehaviour {
 
     void HandleKeys()
     {
-        Debug.Log("A: " + m_Attack);
-        if (Input.GetKeyDown(m_Attack))
-            GetComponentInChildren<Weapon>().Attack();
-
+		if (Input.GetKeyDown (m_Attack)) {
+			Attack ();
+		}
         #region Debug Keys
         if (Input.GetKeyDown(m_ForceSlow)) ApplyDebuff(Debuffs.Slow, 0.5f, 5);
 		/*if (Input.GetKeyDown(m_DropSacrifice)) {
@@ -218,6 +239,16 @@ public class Player : MonoBehaviour {
             }
         }
     }
+
+	void Attack()
+	{
+		if(!m_IsAttacking)
+		{
+			m_IsAttacking = true;
+			m_AnimationTimer = 0;
+			GetComponent<SpriteRenderer> ().sprite = m_AttackSprite;
+		}
+	}
 
 	void OnCollisionEnter2D(Collision2D coll)
 	{
