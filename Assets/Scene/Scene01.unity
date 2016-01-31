@@ -462,7 +462,7 @@ MonoBehaviour:
   m_PowerUps:
   - {fileID: 422666, guid: 350c8271268df8b45ab8b29ec1ce614f, type: 2}
   - {fileID: 430434, guid: 1f5065b0498564247b423e89211353fc, type: 2}
-  m_ChanceForSacrifice: 10
+  m_ChanceForSacrifice: 100
 --- !u!4 &491416107 stripped
 Transform:
   m_PrefabParentObject: {fileID: 483734, guid: 9f8222a3704888b4a845ce98ad7a19a6, type: 2}
@@ -849,7 +849,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 165196, guid: 9f8222a3704888b4a845ce98ad7a19a6, type: 2}
       propertyPath: m_Name
-      value: Player4
+      value: God 4
       objectReference: {fileID: 0}
     - target: {fileID: 11472274, guid: 9f8222a3704888b4a845ce98ad7a19a6, type: 2}
       propertyPath: _iControllerNumber
@@ -866,6 +866,10 @@ Prefab:
     - target: {fileID: 483734, guid: 9f8222a3704888b4a845ce98ad7a19a6, type: 2}
       propertyPath: m_LocalScale.z
       value: 1.0217882
+      objectReference: {fileID: 0}
+    - target: {fileID: 165196, guid: 9f8222a3704888b4a845ce98ad7a19a6, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9f8222a3704888b4a845ce98ad7a19a6, type: 2}
@@ -984,11 +988,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 165196, guid: 9f8222a3704888b4a845ce98ad7a19a6, type: 2}
       propertyPath: m_Name
-      value: Player1
+      value: God 1
       objectReference: {fileID: 0}
     - target: {fileID: 11472274, guid: 9f8222a3704888b4a845ce98ad7a19a6, type: 2}
       propertyPath: _iControllerNumber
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 483734, guid: 9f8222a3704888b4a845ce98ad7a19a6, type: 2}
       propertyPath: m_LocalScale.x
@@ -1556,7 +1560,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 165196, guid: 9f8222a3704888b4a845ce98ad7a19a6, type: 2}
       propertyPath: m_Name
-      value: Player3
+      value: God 3
       objectReference: {fileID: 0}
     - target: {fileID: 11472274, guid: 9f8222a3704888b4a845ce98ad7a19a6, type: 2}
       propertyPath: _iControllerNumber
@@ -1573,6 +1577,10 @@ Prefab:
     - target: {fileID: 483734, guid: 9f8222a3704888b4a845ce98ad7a19a6, type: 2}
       propertyPath: m_LocalScale.z
       value: 1.0217882
+      objectReference: {fileID: 0}
+    - target: {fileID: 165196, guid: 9f8222a3704888b4a845ce98ad7a19a6, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9f8222a3704888b4a845ce98ad7a19a6, type: 2}
@@ -2341,7 +2349,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 165196, guid: 9f8222a3704888b4a845ce98ad7a19a6, type: 2}
       propertyPath: m_Name
-      value: Player2
+      value: God 2
       objectReference: {fileID: 0}
     - target: {fileID: 11472274, guid: 9f8222a3704888b4a845ce98ad7a19a6, type: 2}
       propertyPath: _iControllerNumber
@@ -2359,6 +2367,10 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 1.0217881
       objectReference: {fileID: 0}
+    - target: {fileID: 165196, guid: 9f8222a3704888b4a845ce98ad7a19a6, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9f8222a3704888b4a845ce98ad7a19a6, type: 2}
   m_IsPrefabParent: 0
@@ -2370,13 +2382,26 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 2108718673}
+  - 114: {fileID: 2108718672}
   m_Layer: 0
-  m_Name: GameEnd
+  m_Name: EndGame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &2108718672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2108718671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1efe9bbb785f50c44936ba753f7d18aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  endGame: {fileID: 1725825420}
 --- !u!4 &2108718673
 Transform:
   m_ObjectHideFlags: 0
