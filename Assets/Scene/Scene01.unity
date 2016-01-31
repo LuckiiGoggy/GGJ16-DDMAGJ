@@ -333,7 +333,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SacrificalItems:
-  - {fileID: 468114, guid: 0e1b876df4ccc3b48b192c2f5facb3c7, type: 2}
+  - {fileID: 459684, guid: 07668fbff7461bb42ab784114a000a1d, type: 2}
+  - {fileID: 454416, guid: c3df2a94d9b2cd74e8e59e7a8f7c186c, type: 2}
+  - {fileID: 402668, guid: 6f4b0dc3197b4a74192fa555cee67559, type: 2}
   m_PowerUps:
   - {fileID: 422666, guid: 350c8271268df8b45ab8b29ec1ce614f, type: 2}
   m_ChanceForSacrifice: 3
@@ -1520,7 +1522,7 @@ Transform:
   - {fileID: 1998951099}
   - {fileID: 1400748751}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 9
 --- !u!1 &1998951098
 GameObject:
   m_ObjectHideFlags: 0

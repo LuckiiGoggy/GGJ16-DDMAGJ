@@ -15,7 +15,7 @@ GameObject:
   - 114: {fileID: 11431672}
   - 114: {fileID: 11468126}
   m_Layer: 0
-  m_Name: Sacrifice
+  m_Name: SacrificeBase
   m_TagString: Sacrifice
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -99,7 +99,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53215d7cb70f88145b0faa81efafbeb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Sacrifice: {fileID: 131878}
   m_SacrificeType: 0
 --- !u!212 &21207552
 SpriteRenderer:

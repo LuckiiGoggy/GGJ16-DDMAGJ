@@ -15,7 +15,7 @@ GameObject:
   - 114: {fileID: 11445794}
   - 114: {fileID: 11415826}
   m_Layer: 0
-  m_Name: SacrificeBase 2
+  m_Name: SacrificeTotem
   m_TagString: Sacrifice
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -87,8 +87,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53215d7cb70f88145b0faa81efafbeb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Sacrifice: {fileID: 113284}
-  m_SacrificeType: 1
+  m_SacrificeType: 2
 --- !u!114 &11445794
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -127,7 +126,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: fd950574367d48645a501718a70a8ccc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 96a8f2ad9d5de9e45984f93a3b9ec516, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -137,7 +136,16 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_SacrificeType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 96a8f2ad9d5de9e45984f93a3b9ec516,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 113284}
