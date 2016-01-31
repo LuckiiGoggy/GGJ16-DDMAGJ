@@ -37,7 +37,7 @@ public class Base : MonoBehaviour {
 
     public void FixedUpdate()
     {
-        if (m_Owner != null)
+        if (m_Owner != null && !(m_Owner.GetType() is AIPlayer))
         {
             if (SacrificesCompleted)
             {
@@ -49,7 +49,19 @@ public class Base : MonoBehaviour {
                 m_Owner.GetComponent<Player>().GodModeOff();
                 m_Spawner.StopSpawningShields();
             }
-        }
+        } else if (m_Owner.GetType() is AIPlayer)
+            {
+                if (SacrificesCompleted)
+                {
+                    m_Owner.GetComponent<AIPlayer>().AIGodModeOn();
+                    m_Spawner.StartSpawningShields();
+                }
+                else
+                {
+                    m_Owner.GetComponent<AIPlayer>().AIGodModeOff();
+                    m_Spawner.StopSpawningShields();
+                }
+            }
 	}
 
 	public void AddSacrifice(GameObject sacrifice)
