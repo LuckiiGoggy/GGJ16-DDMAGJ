@@ -7,11 +7,7 @@ public class Base : MonoBehaviour {
 	public Player m_Owner;
 	public bool SacrificesCompleted { 
 		get { 
-			bool result = true;
-			foreach (bool completed in m_Completed) {
-				result = completed;
-			}
-			return result;
+			return m_Completed[0] && m_Completed[1] && m_Completed[2];
 		}
 	}
 			
@@ -40,19 +36,25 @@ public class Base : MonoBehaviour {
 
 	public void AddSacrifice(GameObject sacrifice)
 	{
-		m_Spawner.Spawn();
-
-		m_Completed[(int) sacrifice.GetComponent<Sacrifice>().SacrificeType] = true;
+		m_Completed[(int) sacrifice.GetComponent<Sacrifice>().m_SacrificeType] = true;
 		Destroy (sacrifice);
+
+
+		int i = 0;
+		foreach (bool completed in m_Completed) {
+			if (completed) i++;
+		}
+		print(i + " sacrifices completed");
 
 	}
 
 	void OnTriggerEnter2D(Collider2D coll)
 	{
-		print ("base triggers with something: " + coll.gameObject.tag);
+        if (coll.gameObject.tag == "Sacrifice" || coll.gameObject.tag == "Item")
+            m_Spawner.Spawn();
+
 
 		if (coll.gameObject.tag == "Sacrifice") {
-			print ("Sacrifice triggers base");
 			AddSacrifice (coll.gameObject);
 		}
 
