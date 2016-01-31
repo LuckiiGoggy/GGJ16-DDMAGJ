@@ -42,8 +42,15 @@ public class Base : MonoBehaviour {
 	{
 		m_Spawner.Spawn();
 
-		m_Completed[(int) sacrifice.GetComponent<Sacrifice>().SacrificeType] = true;
+		m_Completed[(int) sacrifice.GetComponent<Sacrifice>().m_SacrificeType] = true;
 		Destroy (sacrifice);
+
+
+		int i = 0;
+		foreach (bool completed in m_Completed) {
+			if (completed) i++;
+		}
+		print(i + " sacrifices completed");
 
 	}
 
