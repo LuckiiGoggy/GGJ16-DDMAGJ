@@ -271,6 +271,8 @@ public class Player : MonoBehaviour {
 
 		animator.SetTrigger ("IsGod");
 
+		ApplyDebuff(Debuffs.Slow, 0.5f, float.MaxValue);
+
         //Change Sprite
         //Activate Animation
         ApplyDebuff(Debuffs.Stun, 42f, m_TransformationLength);
@@ -283,6 +285,8 @@ public class Player : MonoBehaviour {
         m_IsInGodMode = false;
 
 		animator.SetTrigger ("Revert");
+
+		ApplyDebuff(Debuffs.Slow, 1, 0);
 
         //Change Sprite
         //Activate Animation

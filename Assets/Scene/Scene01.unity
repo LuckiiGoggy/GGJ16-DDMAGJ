@@ -461,7 +461,7 @@ MonoBehaviour:
   m_PowerUps:
   - {fileID: 422666, guid: 350c8271268df8b45ab8b29ec1ce614f, type: 2}
   - {fileID: 430434, guid: 1f5065b0498564247b423e89211353fc, type: 2}
-  m_ChanceForSacrifice: 10
+  m_ChanceForSacrifice: 90
 --- !u!4 &491416107 stripped
 Transform:
   m_PrefabParentObject: {fileID: 483734, guid: 9f8222a3704888b4a845ce98ad7a19a6, type: 2}

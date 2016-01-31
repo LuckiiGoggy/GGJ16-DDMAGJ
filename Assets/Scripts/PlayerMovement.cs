@@ -18,20 +18,38 @@ public class PlayerMovement : MonoBehaviour {
 
 	private Rigidbody2D _rigidbody;
 	private PlayerAnimation playerAnimation;
+	private Player player;
 
 	void Start ()
 	{
 		_rigidbody = GetComponent<Rigidbody2D> ();
 		playerAnimation = GetComponent<PlayerAnimation> ();
+		player = GetComponent<Player> ();
 	}
 
 	void FixedUpdate ()
 	{
 		// animation stuff
 		if (Input.GetAxisRaw (_horizontalAxis) != 0 || Input.GetAxisRaw (_verticalAxis) != 0) {
-			playerAnimation.animator.SetBool ("Walk", true);
-		} else {
-			playerAnimation.animator.SetBool ("Walk", false);
+			if (player.m_IsInGodMode)
+			{
+				playerAnimation.animator.SetBool ("GodWalk", true);
+			} 
+			else 
+			{
+				playerAnimation.animator.SetBool ("Walk", true);
+			}
+		}
+		else 
+		{
+			if (player.m_IsInGodMode) 
+			{
+				playerAnimation.animator.SetBool ("GodWalk", false);
+			} 
+			else 
+			{
+				playerAnimation.animator.SetBool ("Walk", false);
+			}
 		}
 
 		if (_rigidbody.velocity.magnitude > 0) {
