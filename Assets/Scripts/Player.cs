@@ -251,8 +251,13 @@ public class Player : MonoBehaviour {
 				//	ApplyDebuff(Debuffs.Stun, 42f, weapon.m_StunLength);
 
 
-				if (weapon.IsGodWeapon() && !m_IsInvulnerable) 
-					Destroy(this.gameObject); 
+				if (weapon.IsGodWeapon () && !m_IsInvulnerable) {
+					Destroy (this.gameObject); 
+					if (GameObject.FindGameObjectsWithTag ("Player").Count () == 1) {
+						Destroy (gameObject.GetComponent<PlayerMovement> ());
+						// GameObject.Find ("GameEnd").GetComponent<GameEnd>().PlayerWins (GameObject.FindGameObjectWithTag ("Player"));
+					}
+				}
             }
         }
     }
