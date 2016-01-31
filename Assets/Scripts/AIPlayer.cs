@@ -28,7 +28,6 @@ public class AIPlayer : Player {
         _rigidbody = GetComponent<Rigidbody2D>();
         restrictMovement = false;
         m_IdleSprite = GetComponent<SpriteRenderer> ().sprite;
-		m_AttackSprite = Resources.Load("battingv1", typeof(Sprite)) as Sprite;
 
 		m_DebuffTimers = new Dictionary<Debuffs, float>();
 		m_PowerStateTimers = new Dictionary<PowerStates, float>();

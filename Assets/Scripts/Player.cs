@@ -14,7 +14,6 @@ public class Player : MonoBehaviour {
 	public KeyCode m_Pause;
 
 	protected Sprite m_IdleSprite;
-    protected Sprite m_AttackSprite;
 
 	#region Player States
 
@@ -134,7 +133,6 @@ public class Player : MonoBehaviour {
 	void Start () {
 		m_PauseGame = GameObject.Find ("PauseGame").GetComponent<PauseGame> ();
 		m_IdleSprite = GetComponent<SpriteRenderer> ().sprite;
-		m_AttackSprite = Resources.Load("battingv1", typeof(Sprite)) as Sprite;
 
 		m_DebuffTimers = new Dictionary<Debuffs, float>();
 		m_PowerStateTimers = new Dictionary<PowerStates, float>();
