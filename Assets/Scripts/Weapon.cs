@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Weapon : MonoBehaviour {
     public bool m_IsAttacking;
@@ -18,10 +19,24 @@ public class Weapon : MonoBehaviour {
 	private PlayerAnimation playerAnimation;
 	private BoxCollider2D weaponTrigger;
 
+	private List<AudioSource> m_NormalAttackSounds;
+	private List<AudioSource> m_GodAttackSounds;
+
 	// Use this for initialization
 	void Start () {
 		playerAnimation = GetComponentInParent<PlayerAnimation> ();
 		weaponTrigger = GetComponent<BoxCollider2D> ();
+
+		AudioSource[] sounds = GetComponentsInChildren<AudioSource> ();
+
+		m_NormalAttackSounds = new List<AudioSource> ();
+		m_GodAttackSounds = new List<AudioSource> ();
+		foreach (AudioSource sound in sounds) {
+			if (sound.tag == "NormalAttack")
+				m_NormalAttackSounds.Add (sound);
+			if (sound.tag == "GodAttack")
+				m_GodAttackSounds.Add (sound);
+		}
 	}
 
 	public void SetGodWeapon()
@@ -40,10 +55,11 @@ public class Weapon : MonoBehaviour {
 
     public void Attack()
     {
-        Debug.Log("Attack");
 		if (m_IsGodWeapon == false) {
 			if (!m_IsAttacking) {
 				playerAnimation.animator.SetTrigger ("Attack");
+
+				m_NormalAttackSounds [Random.Range (0, m_NormalAttackSounds.Count)].Play (); 
 
 				m_IsAttacking = true;
 				StartCoroutine (EnableWeaponTriggerTimer ());
@@ -52,6 +68,8 @@ public class Weapon : MonoBehaviour {
 		} else {
 			if (!m_IsAttacking) {
 				playerAnimation.animator.SetTrigger ("GodAttack");
+
+				m_GodAttackSounds [Random.Range (0, m_GodAttackSounds.Count)].Play ();
 
 				m_IsAttacking = true;
 				StartCoroutine (EnableGodWeaponTriggerTimer ());
