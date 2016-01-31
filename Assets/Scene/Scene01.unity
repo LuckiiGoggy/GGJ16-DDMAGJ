@@ -986,8 +986,8 @@ MonoBehaviour:
   - {fileID: 361823154}
   - {fileID: 401521522}
   - {fileID: 770953024}
-  m_GodModeMusic: {fileID: 8300000, guid: a8d031df898aecf439da412795a232bc, type: 3}
-  m_NormMusics: {fileID: 8300000, guid: 9735eb3174e11bd48aedda1844e62fa4, type: 3}
+  m_GodModeMusic: {fileID: 8300000, guid: 87d437e5383a4e94481f2843b5d9b669, type: 3}
+  m_NormMusics: {fileID: 8300000, guid: 1ec588c8792e388488586890e506a5ce, type: 3}
 --- !u!82 &440980675
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1002,7 +1002,7 @@ AudioSource:
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
-  Mute: 1
+  Mute: 0
   Spatialize: 0
   Priority: 128
   DopplerLevel: 1
@@ -4328,6 +4328,7 @@ Prefab:
     - {fileID: 11434914, guid: a3e8c84fb6ecb464c860e2ad97fc7db7, type: 2}
     - {fileID: 6175564, guid: a3e8c84fb6ecb464c860e2ad97fc7db7, type: 2}
     - {fileID: 5066464, guid: a3e8c84fb6ecb464c860e2ad97fc7db7, type: 2}
+    - {fileID: 8243666, guid: a3e8c84fb6ecb464c860e2ad97fc7db7, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: a3e8c84fb6ecb464c860e2ad97fc7db7, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1962877409
