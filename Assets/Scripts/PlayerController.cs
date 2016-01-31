@@ -35,5 +35,6 @@ public class PlayerController : MonoBehaviour {
 		_playerRotation_ref._verticalAxis = InputControllerManager._verticalAxis;
 
 		m_Player.m_Attack = InputControllerManager._button01;
+		m_Player.m_Pause = InputControllerManager._buttonPause;
 	}
 }

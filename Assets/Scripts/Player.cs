@@ -7,9 +7,11 @@ public class Player : MonoBehaviour {
 
 	public float m_MovementSpeed;
 	private GameObject m_Sacrifice;
+	private PauseGame m_PauseGame;
 
 	public KeyCode m_DropSacrifice;
 	public KeyCode m_Attack;
+	public KeyCode m_Pause;
 
 	private Sprite m_IdleSprite;
 	private Sprite m_AttackSprite;
@@ -136,6 +138,7 @@ public class Player : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		m_PauseGame = GameObject.Find ("PauseGame").GetComponent<PauseGame> ();
 		m_IdleSprite = GetComponent<SpriteRenderer> ().sprite;
 		m_AttackSprite = Resources.Load("battingv1", typeof(Sprite)) as Sprite;
 
@@ -154,65 +157,71 @@ public class Player : MonoBehaviour {
 
 		animator = GetComponent<Animator> ();
 	}
+
+	void Update() {
+		if (Input.GetKeyDown (m_Pause)) {
+			if (Time.timeScale != 0) {
+				m_PauseGame.Pause ();
+			} else {
+				m_PauseGame.Unpause ();
+			}
+		}
+	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
 		if (GameObject.FindGameObjectsWithTag ("Player").Count () <= 1) {
 			Destroy (gameObject.GetComponent<PlayerMovement> ());
-			GameObject.Find ("EndGame").GetComponent<EndGame>().PlayerWins (GameObject.FindGameObjectWithTag ("Player"));
+			GameObject.Find ("EndGame").GetComponent<EndGame> ().PlayerWins (GameObject.FindGameObjectWithTag ("Player"));
 		}
 
-		PlayerMovement control = gameObject.GetComponent<PlayerMovement>();
+		PlayerMovement control = gameObject.GetComponent<PlayerMovement> ();
 
-		foreach (Debuffs debuff in m_DebuffTimers.Keys.ToList()) 
-			m_DebuffTimers[debuff] = Mathf.Max(m_DebuffTimers[debuff] - Time.fixedDeltaTime, 0);
-		foreach (PowerStates powerState in m_PowerStateTimers.Keys.ToList()) 
-			m_PowerStateTimers[powerState] = Mathf.Max(m_PowerStateTimers[powerState] - Time.fixedDeltaTime, 0);
+		foreach (Debuffs debuff in m_DebuffTimers.Keys.ToList())
+			m_DebuffTimers [debuff] = Mathf.Max (m_DebuffTimers [debuff] - Time.fixedDeltaTime, 0);
+		foreach (PowerStates powerState in m_PowerStateTimers.Keys.ToList())
+			m_PowerStateTimers [powerState] = Mathf.Max (m_PowerStateTimers [powerState] - Time.fixedDeltaTime, 0);
 
-        m_DebuffGracePeriodTime = Mathf.Max(m_DebuffGracePeriodTime - Time.fixedDeltaTime, 0);
+		m_DebuffGracePeriodTime = Mathf.Max (m_DebuffGracePeriodTime - Time.fixedDeltaTime, 0);
 
 		//Debug.Log("Before: " + control._fMoveSpeed);
-		if(m_PowerStateTimers[PowerStates.SuperSpeed] == 0 &&
-			m_DebuffTimers[Debuffs.Slow] == 0 )
-		{
+		if (m_PowerStateTimers [PowerStates.SuperSpeed] == 0 &&
+		   m_DebuffTimers [Debuffs.Slow] == 0) {
 			control._fMoveSpeed = m_MovementSpeed;
 		}
 
-        if (m_DebuffTimers[Debuffs.Stun] == 0) control.enabled = true;
+		if (m_DebuffTimers [Debuffs.Stun] == 0)
+			control.enabled = true;
 
 
 
 		//Debug.Log("After: " + control._fMoveSpeed);
 
-        if (m_PowerStateTimers[PowerStates.Invulnerability] == 0)
-        {
-            m_IsInvulnerable = false;
-            GetComponentInChildren<Shield>().GetComponent<SpriteRenderer>().enabled = false;
+		if (m_PowerStateTimers [PowerStates.Invulnerability] == 0) {
+			m_IsInvulnerable = false;
+			GetComponentInChildren<Shield> ().GetComponent<SpriteRenderer> ().enabled = false;
             
-        }
+		}
 
-		if (m_IsAttacking)
-		{
+		if (m_IsAttacking) {
 			m_AnimationTimer += Time.fixedDeltaTime;
 
-			if(m_AnimationTimer >= m_AnimationLength)
-			{
+			if (m_AnimationTimer >= m_AnimationLength) {
 				m_IsAttacking = false;
 				GetComponent<SpriteRenderer> ().sprite = m_IdleSprite;
 			}
 		}
 
 		#region Debug Updates
-		m_DebuffTimersKeys = m_DebuffTimers.Keys.ToList();
-		m_DebuffTimersValues = m_DebuffTimers.Values.ToList();
+		m_DebuffTimersKeys = m_DebuffTimers.Keys.ToList ();
+		m_DebuffTimersValues = m_DebuffTimers.Values.ToList ();
 
-		m_PowerStateTimersKeys = m_PowerStateTimers.Keys.ToList();
-		m_PowerStateTimersValues = m_PowerStateTimers.Values.ToList();
+		m_PowerStateTimersKeys = m_PowerStateTimers.Keys.ToList ();
+		m_PowerStateTimersValues = m_PowerStateTimers.Values.ToList ();
 
 		#endregion
 
-		CheckStates();
-
+		CheckStates ();
 		HandleKeys();
 	}
 
