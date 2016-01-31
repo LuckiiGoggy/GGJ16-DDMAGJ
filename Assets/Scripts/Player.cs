@@ -314,7 +314,7 @@ public class Player : MonoBehaviour {
         if (m_IsInGodMode) return;
 
         m_IsInGodMode = true;
-
+        animator = GetComponent<Animator>();
         animator.SetTrigger("IsGod");
         //Play transformation particles
         GetComponentInChildren<ParticleSystem>().Play();
@@ -334,8 +334,8 @@ public class Player : MonoBehaviour {
         if (!m_IsInGodMode) return;
 
         m_IsInGodMode = false;
-
-		animator.SetTrigger ("Revert");
+        animator = GetComponent<Animator>();
+        animator.SetTrigger ("Revert");
         //Player transformation particle
         GetComponentInChildren<ParticleSystem>().Play();
 
