@@ -161,14 +161,14 @@ public class Player : MonoBehaviour {
 
         m_DebuffGracePeriodTime = Mathf.Max(m_DebuffGracePeriodTime - Time.fixedDeltaTime, 0);
 
-		Debug.Log("Before: " + control._fMoveSpeed);
+		// Debug.Log("Before: " + control._fMoveSpeed);
 		if(m_PowerStateTimers[PowerStates.SuperSpeed] == 0 &&
 			m_DebuffTimers[Debuffs.Slow] == 0 &&
 			m_DebuffTimers[Debuffs.Stun] == 0)
 		{
 			control._fMoveSpeed = m_MovementSpeed;
 		}
-		Debug.Log("After: " + control._fMoveSpeed);
+		// Debug.Log("After: " + control._fMoveSpeed);
 
 		if (m_PowerStateTimers[PowerStates.Invulnerability] == 0) m_IsInvulnerable = false;
 
