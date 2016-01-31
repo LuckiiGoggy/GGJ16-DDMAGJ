@@ -968,7 +968,7 @@ MonoBehaviour:
   - {fileID: 430434, guid: 1f5065b0498564247b423e89211353fc, type: 2}
   m_Shield: {fileID: 0}
   m_SpawningShields: 0
-  m_ChanceForSacrifice: 0
+  m_ChanceForSacrifice: 60
   m_ChanceForShield: 0
 --- !u!114 &440980674
 MonoBehaviour:
