@@ -16,6 +16,10 @@ public class Player : MonoBehaviour {
 	protected Sprite m_IdleSprite;
     protected Sprite m_AttackSprite;
 
+    public List<AudioClip> m_DeathSounds;
+    public AudioSource m_AudioSource;
+
+
 	#region Player States
 
 	public bool m_IsInvulnerable;
@@ -293,6 +297,8 @@ public class Player : MonoBehaviour {
     {
         Destroy(this.gameObject, 1f);
         GetComponent<PlayerMovement>().enabled = false;
+        m_AudioSource.PlayOneShot(m_DeathSounds[Random.Range(0, m_DeathSounds.Count)]);
+        
         //GetComponent<Player>().enabled = false;
     }
 

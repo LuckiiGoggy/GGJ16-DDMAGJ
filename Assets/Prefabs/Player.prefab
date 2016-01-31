@@ -70,6 +70,7 @@ GameObject:
   - 95: {fileID: 9558476}
   - 114: {fileID: 11466798}
   - 60: {fileID: 6015754}
+  - 82: {fileID: 8203354}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -257,6 +258,80 @@ BoxCollider2D:
   m_Offset: {x: -0.0000076293945, y: 0}
   serializedVersion: 2
   m_Size: {x: 2.42, y: 7.97}
+--- !u!82 &8203354
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 165196}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!95 &9558476
 Animator:
   serializedVersion: 3
@@ -289,8 +364,12 @@ MonoBehaviour:
   m_DropSacrifice: 0
   m_Attack: 0
   m_Pause: 0
-  m_AnimationLength: 0
-  m_Spawner: {fileID: 0}
+  m_DeathSounds:
+  - {fileID: 8300000, guid: 065e98860b3dff8498828f76302c6e5d, type: 3}
+  - {fileID: 8300000, guid: b84285f265a55064283f8c03945396d5, type: 3}
+  - {fileID: 8300000, guid: f59677803cf9c144781f6a3bead9b6e8, type: 3}
+  - {fileID: 8300000, guid: 21d20c970c0d4204eb32ae478cb2bf6e, type: 3}
+  m_AudioSource: {fileID: 0}
   m_IsInvulnerable: 0
   m_IsInGodMode: 0
   m_TransformationLength: 3
@@ -5085,6 +5164,10 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 0}
+      propertyPath: m_DeathSounds.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
@@ -5092,6 +5175,34 @@ Prefab:
       propertyPath: looping
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: panLevelCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: reverbZoneMixCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_DeathSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 065e98860b3dff8498828f76302c6e5d, type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_DeathSounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: b84285f265a55064283f8c03945396d5, type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_DeathSounds.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: f59677803cf9c144781f6a3bead9b6e8, type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_DeathSounds.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 21d20c970c0d4204eb32ae478cb2bf6e, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 165196}

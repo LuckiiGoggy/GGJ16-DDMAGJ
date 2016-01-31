@@ -7,6 +7,10 @@ public class Base : MonoBehaviour {
 	public Player m_Owner;
 	public float m_BaseInvulnerableLength;
 
+    public AudioClip m_BaseCompleteSFX;
+    public AudioClip m_ItemGetSFX;
+
+
 	public bool SacrificesCompleted { 
 		get { 
 			return m_Completed[0] && m_Completed[1] && m_Completed[2];
@@ -55,6 +59,7 @@ public class Base : MonoBehaviour {
 
 		if (!SacrificesCompleted) {
 			m_Spawner.Spawn();
+
 		}
 
 		if (SacrificesCompleted) 
@@ -69,20 +74,35 @@ public class Base : MonoBehaviour {
 
 	void ActivateRespectiveTotem ()
 	{
-		if (m_Completed [1] == true) 
-		{
+		if (m_Completed [1] == true)
+        {
+            if (bottomTotem_activated.activeInHierarchy == false) ;
+            {
+                //GetComponent<AudioSource>().PlayOneShot(m_BaseCompleteSFX);
+                //GetComponent<AudioSource>().pitch++;
+            }
 			bottomTotem_deactivated.SetActive (false);
-			bottomTotem_activated.SetActive (true);
+            bottomTotem_activated.SetActive(true);
 		}
 		if (m_Completed [0] == true) 
 		{
+            if (middleTotem_activated.activeInHierarchy == false) ;
+            {
+                //GetComponent<AudioSource>().PlayOneShot(m_BaseCompleteSFX);
+                //GetComponent<AudioSource>().pitch++;
+            }
 			middleTotem_deactivated.SetActive (false);
-			middleTotem_activated.SetActive (true);
+            middleTotem_activated.SetActive(true);
 		}
 		if (m_Completed [2] == true) 
 		{
+            if (topTotem_activated.activeInHierarchy == false) ;
+            {
+                //GetComponent<AudioSource>().PlayOneShot(m_BaseCompleteSFX);
+                //GetComponent<AudioSource>().pitch++;
+            }
 			topTotem_deactivated.SetActive (false);
-			topTotem_activated.SetActive (true);
+            topTotem_activated.SetActive(true);
 		}
 	}
 
@@ -107,16 +127,22 @@ public class Base : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D coll)
-	{
+    {
         if (coll.gameObject.tag == "Item")
+        {
+            GetComponent<AudioSource>().PlayOneShot(m_ItemGetSFX);
             m_Spawner.Spawn();
+        }
 
-		else if (coll.gameObject.tag == "Sacrifice") {
+        else if (coll.gameObject.tag == "Sacrifice")
+        {
+            GetComponent<AudioSource>().PlayOneShot(m_BaseCompleteSFX);
 			if (!SacrificesCompleted)
 				AddSacrifice (coll.gameObject);
 			else
 				RemoveSacrifice (coll.gameObject);
 		}
+
 
 	}
 }

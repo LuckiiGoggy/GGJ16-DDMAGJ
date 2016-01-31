@@ -60,6 +60,8 @@ public class Weapon : MonoBehaviour {
 		}
     }
 
+
+
 	IEnumerator EnableWeaponTriggerTimer ()
 	{
 		yield return new WaitForSeconds (m_WeaponTriggerTimer);
