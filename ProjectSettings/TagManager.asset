@@ -10,6 +10,8 @@ TagManager:
   - Meteor
   - AI
   - DeathSpurt
+  - GodAttack
+  - NormalAttack
   layers:
   - Default
   - TransparentFX
