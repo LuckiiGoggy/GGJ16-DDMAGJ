@@ -30,6 +30,8 @@ public class Player : MonoBehaviour {
 	public float m_TransformationLength;
 	#endregion
 
+
+
 	#region Debuffs
 	public enum Debuffs { Stun, Slow }
 
@@ -255,16 +257,6 @@ public class Player : MonoBehaviour {
         }
     }
 
-	void OnCollisionEnter2D(Collision2D coll)
-	{
-		print ("player collides with something: " + coll.gameObject.tag);
-		/* not picking up the sacrifice right now
-		if (coll.gameObject.tag == "Sacrifice" && m_StunTimer <= 0) {
-			print ("Player collides Sacrifice");
-			PickUpSacrifice (coll.gameObject);
-		} */
-	}
-
 
     public void GodModeOn()
     {
@@ -277,6 +269,8 @@ public class Player : MonoBehaviour {
         //Change Sprite
         //Activate Animation
         ApplyDebuff(Debuffs.Stun, 42f, m_TransformationLength);
+		GameObject.Find ("Spawner").GetComponent<Spawner> ().Pause(m_TransformationLength);
+
     }
     public void GodModeOff()
     {

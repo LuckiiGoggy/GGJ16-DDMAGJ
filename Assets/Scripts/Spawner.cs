@@ -10,6 +10,7 @@ public class Spawner : MonoBehaviour {
 
 	public List<Transform> m_SacrificalItems;
 	public List<Transform> m_PowerUps;
+	private float m_PausedTime = -1;
 
 	// 0-1 float value for percentage of chance to spawn a sacrifice
 	public float m_ChanceForSacrifice;
@@ -21,7 +22,18 @@ public class Spawner : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-		
+		if (m_PausedTime == 0) {
+			Spawn ();
+			m_PausedTime--;
+		}
+
+		if (m_PausedTime > 0) {
+			m_PausedTime = Mathf.Max(m_PausedTime - Time.fixedDeltaTime, 0);
+		}
+	}
+
+	public void Pause(float length) {
+		m_PausedTime = length;
 	}
 
 	public void Spawn()
@@ -29,12 +41,10 @@ public class Spawner : MonoBehaviour {
         print("Spawning ");
 		if (Random.value * 100 <= m_ChanceForSacrifice)
 		{
-            print("Spawning Sacrifice");
 			Instantiate(m_SacrificalItems[Random.Range(0, m_SacrificalItems.Count)]);
 		}
 		else
 		{
-            print("Spawning PowerUp");
 			Instantiate(m_PowerUps[Random.Range(0, m_PowerUps.Count)]);
 		}
 	}
