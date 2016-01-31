@@ -13,7 +13,7 @@ public class InputControllerManager : MonoBehaviour {
 		{
 			_horizontalAxis = "Horizontal";
 			_verticalAxis = "Vertical";
-            _button01 = KeyCode.U;
+            _button01 = KeyCode.Space;
             
 		}
 		else if (joystickNumber == 1) 

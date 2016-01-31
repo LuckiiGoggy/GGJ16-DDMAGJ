@@ -29,14 +29,6 @@ public class Weapon : MonoBehaviour {
             {
                 m_IsAttacking = false;
             }
-            else if (m_AnimationTimer >= m_AnimationLength / 2)
-            {
-                transform.Translate(Vector3.down * m_AttackRange / 2 * Time.fixedDeltaTime);
-            }
-            else if (m_AnimationTimer <= m_AnimationLength / 2)
-            {
-                transform.Translate(Vector3.up * m_AttackRange / 2 * Time.fixedDeltaTime);
-            }
         }
 	}
 
