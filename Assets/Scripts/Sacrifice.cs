@@ -15,7 +15,7 @@ public class Sacrifice : MonoBehaviour {
 
 
 	public void Respawn() {
-
+        /*
 		Instantiate(m_Sacrifice, Vector3.zero, Quaternion.identity);
         int randomNumber = Random.Range(0, 2);
         switch (randomNumber) {
@@ -31,7 +31,7 @@ public class Sacrifice : MonoBehaviour {
 			default:
 				m_SacrificeType = SacrificeType.Lamb;
                 break;
-        }
+        }*/
 	}
 
 	public void SetOwner(GameObject owner) {

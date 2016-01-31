@@ -12,9 +12,10 @@ GameObject:
   - 114: {fileID: 11494498}
   - 61: {fileID: 6187542}
   - 50: {fileID: 5075684}
+  - 114: {fileID: 11431672}
   m_Layer: 0
   m_Name: Sacrifice
-  m_TagString: Sacrafice
+  m_TagString: Sacrifice
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -62,6 +63,18 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 7.94, y: 8.12}
+--- !u!114 &11431672
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 131878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05690ba53952e4e419dfd5302a1f6036, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fDecelerateSpeed: 0.8
 --- !u!114 &11494498
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -73,6 +86,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53215d7cb70f88145b0faa81efafbeb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Sacrifice: {fileID: 0}
 --- !u!212 &21207552
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -112,7 +126,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: m_TagString
-      value: Sacrafice
+      value: Sacrifice
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

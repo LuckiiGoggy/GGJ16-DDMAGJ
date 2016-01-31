@@ -217,6 +217,10 @@ Prefab:
       propertyPath: m_RequiredSacrifices
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11434914, guid: a3e8c84fb6ecb464c860e2ad97fc7db7, type: 2}
+      propertyPath: m_Spawner
+      value: 
+      objectReference: {fileID: 440980672}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a3e8c84fb6ecb464c860e2ad97fc7db7, type: 2}
   m_IsPrefabParent: 0
@@ -265,7 +269,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 131878, guid: 0e1b876df4ccc3b48b192c2f5facb3c7, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0e1b876df4ccc3b48b192c2f5facb3c7, type: 2}
@@ -372,9 +376,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccfa487f833132f4f9ed32d1d225cbd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SacrificalItems:
-  - {fileID: 0}
-  PowerUps: []
+  m_SacrificalItems:
+  - {fileID: 468114, guid: 0e1b876df4ccc3b48b192c2f5facb3c7, type: 2}
+  m_PowerUps:
+  - {fileID: 422666, guid: 350c8271268df8b45ab8b29ec1ce614f, type: 2}
+  m_ChanceForSacrifice: 3
 --- !u!1 &506092035
 GameObject:
   m_ObjectHideFlags: 0
@@ -562,14 +568,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7316d1fe005cfd844b16bca544d243f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_StunTimer: 0
-  m_SlowTimer: 0
   m_MovementSpeed: 5
   m_DropSacrifice: 0
   m_Attack: 0
+  m_AnimationLength: 0
   m_IsInvulnerable: 0
   m_IsInGodMode: 0
   m_TransformationLength: 0
+  m_DebuffGracePeriod: 0
+  m_DebuffGracePeriodTime: 0
   m_ForceSlow: 0
   m_DebuffTimersKeys: 
   m_DebuffTimersValues: []
@@ -704,6 +711,10 @@ Prefab:
       propertyPath: m_Owner
       value: 
       objectReference: {fileID: 1314791750}
+    - target: {fileID: 11434914, guid: a3e8c84fb6ecb464c860e2ad97fc7db7, type: 2}
+      propertyPath: m_Spawner
+      value: 
+      objectReference: {fileID: 440980672}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a3e8c84fb6ecb464c860e2ad97fc7db7, type: 2}
   m_IsPrefabParent: 0
@@ -990,14 +1001,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7316d1fe005cfd844b16bca544d243f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_StunTimer: 0
-  m_SlowTimer: 0
   m_MovementSpeed: 5
   m_DropSacrifice: 0
   m_Attack: 0
+  m_AnimationLength: 0
   m_IsInvulnerable: 0
   m_IsInGodMode: 0
   m_TransformationLength: 3
+  m_DebuffGracePeriod: 0
+  m_DebuffGracePeriodTime: 0
   m_ForceSlow: 0
   m_DebuffTimersKeys: 
   m_DebuffTimersValues: []

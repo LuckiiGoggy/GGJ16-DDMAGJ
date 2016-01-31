@@ -3,32 +3,34 @@ using System.Collections;
 
 public class Base : MonoBehaviour {
 
-    public int m_RequiredSacrifices;
-    public int m_CurrentSacrificeCount;
+	public int m_RequiredSacrifices;
+	public int m_CurrentSacrificeCount;
+
+    public Spawner m_Spawner;
 
 	public Player m_Owner;
 
 
-    public void FixedUpdate()
-    {
-        if(m_CurrentSacrificeCount >= m_RequiredSacrifices)
-        {
-            Debug.Log("Enough Sacrifices");
+	public void FixedUpdate()
+	{
+		if(m_CurrentSacrificeCount >= m_RequiredSacrifices)
+		{
+			Debug.Log("Enough Sacrifices");
 			m_Owner.GetComponent<Player>().GodModeOn();
-        }
-        else
-        {
+		}
+		else
+		{
 			m_Owner.GetComponent<Player>().GodModeOff();
-        }
-    }
+		}
+	}
 
 	public void AddSacrifice(GameObject sacrifice)
-    {
-        m_CurrentSacrificeCount += m_RequiredSacrifices;
-		sacrifice.GetComponent<Sacrifice> ().Respawn ();
+	{
+		m_CurrentSacrificeCount += m_RequiredSacrifices;
+		m_Spawner.Spawn();
 		Destroy (sacrifice);
 
-    }
+	}
 
 	void OnTriggerEnter2D(Collider2D coll)
 	{
