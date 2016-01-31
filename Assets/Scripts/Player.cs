@@ -78,12 +78,12 @@ public class Player : MonoBehaviour {
         switch (debuff)
         {
             case Debuffs.Stun:
-                control._fMoveSpeed = Mathf.Min(m_MovementSpeed * 0.5f, 0);
-                m_SlowTimer = Mathf.Max(m_SlowTimer - Time.fixedDeltaTime, 0);
+                control._fMoveSpeed = Mathf.Min(control._fMoveSpeed, 0);
+                m_StunTimer = Mathf.Max(m_StunTimer, 0);
                 break;
             case Debuffs.Slow:
                 control._fMoveSpeed = Mathf.Min(m_MovementSpeed * modifier, control._fMoveSpeed);
-                m_SlowTimer = Mathf.Max(m_SlowTimer - Time.fixedDeltaTime, 0);
+                m_SlowTimer = Mathf.Max(m_SlowTimer, 0);
                 break;
             default:
                 break;
@@ -134,24 +134,29 @@ public class Player : MonoBehaviour {
         m_PowerStateTimers.Add(PowerStates.Invulnerability, 0);
         m_PowerStateTimers.Add(PowerStates.SuperSpeed, 0);
 
+
+        PlayerMovement control = gameObject.GetComponent<PlayerMovement>();
+        control._fMoveSpeed = m_MovementSpeed;
+
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-        //PlayerMovement control = gameObject.GetComponent<PlayerMovement>();
+        PlayerMovement control = gameObject.GetComponent<PlayerMovement>();
 
         foreach (Debuffs debuff in m_DebuffTimers.Keys.ToList()) 
             m_DebuffTimers[debuff] = Mathf.Max(m_DebuffTimers[debuff] - Time.fixedDeltaTime, 0);
         foreach (PowerStates powerState in m_PowerStateTimers.Keys.ToList()) 
             m_PowerStateTimers[powerState] = Mathf.Max(m_PowerStateTimers[powerState] - Time.fixedDeltaTime, 0);
-        
 
+        Debug.Log("Before: " + control._fMoveSpeed);
         if(m_PowerStateTimers[PowerStates.SuperSpeed] == 0 &&
             m_DebuffTimers[Debuffs.Slow] == 0 &&
             m_DebuffTimers[Debuffs.Stun] == 0)
         {
-            //control._fMoveSpeed = m_MovementSpeed;
+            control._fMoveSpeed = m_MovementSpeed;
         }
+        Debug.Log("After: " + control._fMoveSpeed);
 
         if (m_PowerStateTimers[PowerStates.Invulnerability] == 0) m_IsInvulnerable = false;
 
@@ -229,7 +234,10 @@ public class Player : MonoBehaviour {
 		} */
 	}
 
-    public void GodModeOn() { 
+    public void GodModeOn()
+    {
+        if (m_IsInGodMode) return;
+
         m_IsInGodMode = true;
 
         //Change Sprite
@@ -238,6 +246,7 @@ public class Player : MonoBehaviour {
     }
     public void GodModeOff()
     {
+        if (!m_IsInGodMode) return;
         m_IsInGodMode = false;
 
         //Change Sprite

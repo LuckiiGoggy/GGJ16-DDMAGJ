@@ -13,7 +13,7 @@ public class WallBoundary : MonoBehaviour {
 
 	void OnTriggerStay2D (Collider2D other)
 	{
-		if (other.tag == "Sacrifice") 
+		if (other.tag == "Item" || other.tag == "Sacrifice") 
 		{
 			if (forceDirection == ForceDirection.up) 
 			{

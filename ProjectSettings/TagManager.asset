@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Sacrifice
+  - Item
   layers:
   - Default
   - TransparentFX
