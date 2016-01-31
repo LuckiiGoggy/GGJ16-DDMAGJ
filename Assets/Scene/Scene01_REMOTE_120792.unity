@@ -567,7 +567,6 @@ MonoBehaviour:
   m_MovementSpeed: 5
   m_DropSacrifice: 0
   m_Attack: 0
-  m_AnimationLength: 0
   m_IsInvulnerable: 0
   m_IsInGodMode: 0
   m_TransformationLength: 0
@@ -996,7 +995,6 @@ MonoBehaviour:
   m_MovementSpeed: 5
   m_DropSacrifice: 0
   m_Attack: 0
-  m_AnimationLength: 0
   m_IsInvulnerable: 0
   m_IsInGodMode: 0
   m_TransformationLength: 3
@@ -1061,7 +1059,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b78f086aaa7b0df48a042b126db09a5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _iControllerNumber: 0
+  _iControllerNumber: 1
 --- !u!50 &1314791755
 Rigidbody2D:
   serializedVersion: 2

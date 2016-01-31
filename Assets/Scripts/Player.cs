@@ -159,15 +159,13 @@ public class Player : MonoBehaviour {
             m_DebuffTimers[debuff] = Mathf.Max(m_DebuffTimers[debuff] - Time.fixedDeltaTime, 0);
         foreach (PowerStates powerState in m_PowerStateTimers.Keys.ToList()) 
             m_PowerStateTimers[powerState] = Mathf.Max(m_PowerStateTimers[powerState] - Time.fixedDeltaTime, 0);
-
-        Debug.Log("Before: " + control._fMoveSpeed);
+		
         if(m_PowerStateTimers[PowerStates.SuperSpeed] == 0 &&
             m_DebuffTimers[Debuffs.Slow] == 0 &&
             m_DebuffTimers[Debuffs.Stun] == 0)
         {
             control._fMoveSpeed = m_MovementSpeed;
         }
-        Debug.Log("After: " + control._fMoveSpeed);
 
         if (m_PowerStateTimers[PowerStates.Invulnerability] == 0) m_IsInvulnerable = false;
 
