@@ -6,7 +6,6 @@ using System.Linq;
 public class AIPlayer : Player {
     
     public float _offset = 0.3f;
-
     private GameObject m_Sacrifice;
 
     private Sprite m_IdleSprite;
@@ -17,7 +16,7 @@ public class AIPlayer : Player {
     private float m_AnimationTimer;
     #region Power States
 
-    public GameObject m_sacrifice;
+    public GameObject m_target;
     public GameObject m_base;
     public Vector2 _movement;
     private Rigidbody2D _rigidbody;
@@ -56,13 +55,23 @@ public class AIPlayer : Player {
 	// Update is called once per frame
 	void FixedUpdate () {
 
-
         if (restrictMovement == 1)
         {
             return;
         }
 
-        getSacrifice();
+        m_target = FindSacrifice();
+        if (m_target != null)
+        {
+            getSacrifice();
+        } else
+        {
+            m_target = FindItem();
+            if (m_target != null)
+            {
+                getSacrifice();
+            }
+        }
 
         //attackPlayer();
     }
@@ -76,7 +85,7 @@ public class AIPlayer : Player {
     {
 
         Vector2 basePosition = m_base.transform.position;
-        Vector2 sacrificePosition = m_sacrifice.transform.position;
+        Vector2 sacrificePosition = m_target.transform.position;
         Transform _transform = GetComponent<Transform>();
         Vector2 _position = _transform.position;
 
@@ -184,5 +193,31 @@ public class AIPlayer : Player {
         yield return new WaitForSeconds(randomNumber);
         restrictMovement = 0;
     }
-    
+
+    GameObject FindSacrifice()
+    {
+        GameObject[] gos;
+        gos = GameObject.FindGameObjectsWithTag("Sacrifice");
+        if (gos.Length == 0)
+        {
+            return null;
+        }
+        else {
+            return gos[0];
+        }
+    }
+
+    GameObject FindItem()
+    {
+        GameObject[] gos;
+        gos = GameObject.FindGameObjectsWithTag("Item");
+        if (gos.Length == 0)
+        {
+            return null;
+        }
+        else {
+            return gos[0];
+        }
+    }
+
 }
