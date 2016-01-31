@@ -223,7 +223,7 @@ Canvas:
   serializedVersion: 2
   m_RenderMode: 1
   m_Camera: {fileID: 1679327372}
-  m_PlaneDistance: 100
+  m_PlaneDistance: 10
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -2212,7 +2212,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 487312, guid: a3e8c84fb6ecb464c860e2ad97fc7db7, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 11434914, guid: a3e8c84fb6ecb464c860e2ad97fc7db7, type: 2}
       propertyPath: mOwner

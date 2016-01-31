@@ -75,7 +75,7 @@ public class Player : MonoBehaviour {
 				break;
 			case PowerStates.Invulnerability:
 				m_IsInvulnerable = true;
-                GetComponentInChildren<Shield>().GetComponent<SpriteRenderer>().hideFlags = HideFlags.None;
+                GetComponentInChildren<Shield>().GetComponent<SpriteRenderer>().enabled = true;
 				break;
 			default:
 				break;
@@ -90,7 +90,7 @@ public class Player : MonoBehaviour {
 		switch (debuff)
 		{
 			case Debuffs.Stun:
-                control._fMoveSpeed = Mathf.Min(control._fMoveSpeed, 0);
+                control.enabled = false;
                 m_DebuffGracePeriodTime = m_DebuffGracePeriod + duration;
 				break;
 			case Debuffs.Slow:
@@ -169,14 +169,23 @@ public class Player : MonoBehaviour {
 
 		//Debug.Log("Before: " + control._fMoveSpeed);
 		if(m_PowerStateTimers[PowerStates.SuperSpeed] == 0 &&
-			m_DebuffTimers[Debuffs.Slow] == 0 &&
-			m_DebuffTimers[Debuffs.Stun] == 0)
+			m_DebuffTimers[Debuffs.Slow] == 0 )
 		{
 			control._fMoveSpeed = m_MovementSpeed;
 		}
+
+        if (m_DebuffTimers[Debuffs.Stun] == 0) control.enabled = true;
+
+
+
 		//Debug.Log("After: " + control._fMoveSpeed);
 
-		if (m_PowerStateTimers[PowerStates.Invulnerability] == 0) m_IsInvulnerable = false;
+        if (m_PowerStateTimers[PowerStates.Invulnerability] == 0)
+        {
+            m_IsInvulnerable = false;
+            GetComponentInChildren<Shield>().GetComponent<SpriteRenderer>().enabled = false;
+            
+        }
 
 		if (m_IsAttacking)
 		{
@@ -209,6 +218,7 @@ public class Player : MonoBehaviour {
 		{
 			GetComponentInChildren<Weapon>().SetGodWeapon();
 		}
+
 	}
 
 	void HandleKeys()
