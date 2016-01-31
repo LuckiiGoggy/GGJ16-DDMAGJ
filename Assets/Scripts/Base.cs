@@ -7,11 +7,7 @@ public class Base : MonoBehaviour {
 	public Player m_Owner;
 	public bool SacrificesCompleted { 
 		get { 
-			bool result = true;
-			foreach (bool completed in m_Completed) {
-				result = completed;
-			}
-			return result;
+			return m_Completed[0] && m_Completed[1] && m_Completed[2];
 		}
 	}
 			
