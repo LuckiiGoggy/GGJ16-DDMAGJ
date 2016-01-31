@@ -300,6 +300,8 @@ public class Player : MonoBehaviour {
 
         m_Spawner.StartSpawningShields();
 
+        GetComponentInChildren<ParticleSystem>().Play();
+
         
         //Change Sprite
         //Activate Animation
