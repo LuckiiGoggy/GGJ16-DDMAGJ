@@ -19,7 +19,7 @@ public class Base : MonoBehaviour {
 			
 
     public Spawner m_Spawner;
-	private bool[] m_Completed;
+	public bool[] m_Completed;
 
 	public GameObject bottomTotem_deactivated;
 	public GameObject middleTotem_deactivated;
@@ -54,21 +54,16 @@ public class Base : MonoBehaviour {
 
 	public void AddSacrifice(GameObject sacrifice)
 	{
+		Debug.Log ("Do we have all sacrifices: " + SacrificesCompleted);
+
 		m_Completed[(int) sacrifice.GetComponent<Sacrifice>().m_SacrificeType] = true;
 		Destroy (sacrifice);
+
+		ActivateRespectiveTotem ();
 
 		if (!SacrificesCompleted) {
 			m_Spawner.Spawn();
 
-		}
-
-		if (SacrificesCompleted) 
-		{
-			ResetTotems ();
-		}
-		else 
-		{
-			ActivateRespectiveTotem ();
 		}
 	}
 
@@ -108,6 +103,8 @@ public class Base : MonoBehaviour {
 
 	void ResetTotems ()
 	{
+		Debug.Log ("Reset Totems");
+
 		bottomTotem_deactivated.SetActive (true);
 		bottomTotem_activated.SetActive (false);
 		middleTotem_deactivated.SetActive (true);
@@ -124,6 +121,8 @@ public class Base : MonoBehaviour {
 		m_Completed[(int) sacrifice.GetComponent<Sacrifice>().m_SacrificeType] = false;
 		Destroy (sacrifice);
 		m_Spawner.Spawn();
+
+		ResetTotems ();
 	}
 
 	void OnTriggerEnter2D(Collider2D coll)
@@ -139,8 +138,12 @@ public class Base : MonoBehaviour {
             GetComponent<AudioSource>().PlayOneShot(m_BaseCompleteSFX);
 			if (!SacrificesCompleted)
 				AddSacrifice (coll.gameObject);
-			else
+			else 
+			{
 				RemoveSacrifice (coll.gameObject);
+				ActivateRespectiveTotem ();
+			}
+				
 		}
 
 
