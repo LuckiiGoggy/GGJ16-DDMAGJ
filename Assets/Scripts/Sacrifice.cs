@@ -1,33 +1,41 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public enum SacrificeType {
+	Lamb = 0,
+	Chicken = 1,
+	Totem = 2
+}
+
 public class Sacrifice : MonoBehaviour {
-	
-	private GameObject mOwner;
-    public string sacrificeType;
+	public GameObject m_Sacrifice;
+
+	private GameObject m_Owner;
+	private SacrificeType m_SacrificeType;
+	public SacrificeType SacrificeType { get { return m_SacrificeType; } }
 
 
 	public void Respawn() {
-
-		Instantiate(gameObject, Vector3.zero, Quaternion.identity);
+        /*
+		Instantiate(m_Sacrifice, Vector3.zero, Quaternion.identity);
         int randomNumber = Random.Range(0, 2);
         switch (randomNumber) {
             case 0:
-                sacrificeType = "Lamb";
+				m_SacrificeType = SacrificeType.Lamb;
                 break;
             case 1:
-                sacrificeType = "Chicken";
+				m_SacrificeType = SacrificeType.Chicken;
                 break;
             case 2:
-                sacrificeType = "Totem";
+				m_SacrificeType = SacrificeType.Totem;
                 break;
-            default:
-                sacrificeType = "Lamb";
+			default:
+				m_SacrificeType = SacrificeType.Lamb;
                 break;
-        }
+        }*/
 	}
 
 	public void SetOwner(GameObject owner) {
-		mOwner = owner;
+		m_Owner = owner;
 	}
 }
