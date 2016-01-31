@@ -66,7 +66,7 @@ public class AIPlayerMovement : PlayerMovement
         if (lastMoveHor != hor || lastMoveVer != ver)
         {
             AIPlayer player = GetComponent<AIPlayer>();
-            player.makeDecision();
+            //player.makeDecision(0, 0.01f);
         }
 
         lastMoveHor = hor;

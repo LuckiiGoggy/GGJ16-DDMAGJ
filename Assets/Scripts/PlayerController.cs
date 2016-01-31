@@ -16,7 +16,6 @@ public class PlayerController : MonoBehaviour {
 
 	void Awake ()
 	{
-
 		// first get the playermovement and playerrotation on THIS script's gameobject
 		_playerMovement_ref = GetComponent<PlayerMovement> ();
 		_playerRotation_ref = GetComponent<PlayerRotation>();

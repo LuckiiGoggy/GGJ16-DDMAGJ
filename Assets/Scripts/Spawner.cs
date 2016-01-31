@@ -6,14 +6,22 @@ using System.Collections.Generic;
 /// Spawner spawns sacrificial items as well as powers randomly
 /// </summary>
 public class Spawner : MonoBehaviour {
-
+    
 
 	public List<Transform> m_SacrificalItems;
 	public List<Transform> m_PowerUps;
-	private float m_PausedTime = -1;
+    private float m_PausedTime = -1;
 
-	// 0-1 float value for percentage of chance to spawn a sacrifice
+    // The shield powerup that 
+    public Transform m_Shield;
+
+    // If more than 0 the spawner will more likely spawn shields
+    public int m_SpawningShields;
+
+	// 0-100 float value for percentage of chance to spawn a sacrifice
 	public float m_ChanceForSacrifice;
+    // 0-100 float value for percentage of chance to spawn a shield when there's a GM
+    public float m_ChanceForShield;
 
 	// Use this for initialization
 	void Start () {
@@ -39,7 +47,12 @@ public class Spawner : MonoBehaviour {
 	public void Spawn()
     {
         print("Spawning ");
-		if (Random.value * 100 <= m_ChanceForSacrifice)
+
+        if(m_SpawningShields > 0 && Random.value * 100 <= m_ChanceForShield)
+        {
+            Instantiate(m_Shield);
+        }
+		else if (Random.value * 100 <= m_ChanceForSacrifice)
 		{
 			Instantiate(m_SacrificalItems[Random.Range(0, m_SacrificalItems.Count)]);
 		}
@@ -49,5 +62,13 @@ public class Spawner : MonoBehaviour {
 		}
 	}
 
+    public void StartSpawningShields()
+    {
+        m_SpawningShields++;
+    }
 
+    public void StopSpawningShields()
+    {
+        m_SpawningShields--;
+    }
 }

@@ -34,7 +34,7 @@ public class StartGameCountdown : MonoBehaviour {
 		playerMovement3.enabled = false;
 
 		player4.enabled = false;
-		playerMovement4.enabled = false;
+		//playerMovement4.enabled = false;
 
 		StartCoroutine (StartGameDelay ());
 	}
@@ -60,16 +60,18 @@ public class StartGameCountdown : MonoBehaviour {
 
 	void EnablePlayers ()
 	{
-		player1.enabled = true;
-		playerMovement1.enabled = true;
-
-		player2.enabled = true;
-		playerMovement2.enabled = true;
-
-		player3.enabled = true;
-		playerMovement3.enabled = true;
-
-		player4.enabled = true;
-		playerMovement4.enabled = true;
+        EnablePlayer(player1, playerMovement1);
+        EnablePlayer(player2, playerMovement2);
+        EnablePlayer(player3, playerMovement3);
+        EnablePlayer(player4, playerMovement4);
 	}
+
+    private void EnablePlayer(Player player, PlayerMovement playerMovement)
+    {
+        if (player == null) return;
+
+        player.enabled = true;
+        playerMovement.enabled = true;
+
+    }
 }

@@ -6,22 +6,16 @@ using System.Linq;
 public class AIPlayer : Player {
     
     public float _offset = 0.3f;
-
     private GameObject m_Sacrifice;
 
-    private Sprite m_IdleSprite;
-    private Sprite m_AttackSprite;
-
-
-    private bool m_IsAttacking;
-    private float m_AnimationTimer;
     #region Power States
 
-    public GameObject m_sacrifice;
+    public GameObject m_target;
     public GameObject m_base;
     public Vector2 _movement;
     private Rigidbody2D _rigidbody;
-    public int restrictMovement;
+    public bool restrictMovement;
+    public int restrictTarget;
     public Vector2 finalPos;
     private string movetyp;
     private float test;
@@ -32,7 +26,7 @@ public class AIPlayer : Player {
     // Use this for initialization
     void Start () {
         _rigidbody = GetComponent<Rigidbody2D>();
-        restrictMovement = 0;
+        restrictMovement = false;
         m_IdleSprite = GetComponent<SpriteRenderer> ().sprite;
 		m_AttackSprite = Resources.Load("battingv1", typeof(Sprite)) as Sprite;
 
@@ -56,27 +50,65 @@ public class AIPlayer : Player {
 	// Update is called once per frame
 	void FixedUpdate () {
 
-
-        if (restrictMovement == 1)
+        if (restrictMovement)
         {
             return;
         }
 
-        getSacrifice();
 
-        //attackPlayer();
+
+        if (GetComponent<Player>().m_IsInGodMode)
+        {
+            if (restrictTarget == 0)
+            {
+                m_target = FindPlayer();
+                attackPlayer();
+            } else
+            {
+                attackPlayer();
+            }
+        }
+
+
+        else
+        {
+            m_target = FindSacrifice();
+            if (m_target != null)
+            {
+                getSacrifice();
+            }
+            else
+            {
+                m_target = FindItem();
+                if (m_target != null)
+                {
+                    getSacrifice();
+                }
+            }
+        }
+
     }
 
     public void attackPlayer()
     {
-        return;
+        AIPlayerMovement movement = GetComponent<AIPlayerMovement>();
+        
+        if (m_target.tag == "Player")
+        {
+            movement.moveTowards(m_target.transform.position.x, m_target.transform.position.y);
+            if ((m_target.transform.position - transform.position).magnitude < 1)
+            {
+                animator.SetTrigger("Attack");
+                makeDecision(0, 1);
+            }
+        }
     }
 
     public void getSacrifice()
     {
 
         Vector2 basePosition = m_base.transform.position;
-        Vector2 sacrificePosition = m_sacrifice.transform.position;
+        Vector2 sacrificePosition = m_target.transform.position;
         Transform _transform = GetComponent<Transform>();
         Vector2 _position = _transform.position;
 
@@ -172,17 +204,88 @@ public class AIPlayer : Player {
     //    restrictMovement = 0;
     //}
 
-    public void makeDecision()
+    public void makeDecision(float min, float max)
     {
-        StartCoroutine(makeDecisionTimer());
+        StartCoroutine(makeDecisionTimer(min, max));
     }
 
-    IEnumerator makeDecisionTimer()
+    IEnumerator makeDecisionTimer(float min, float max)
     {
-        restrictMovement = 1;
-        float randomNumber = Random.Range(0, 0.01f);
+        restrictMovement = false;
+        float randomNumber = Random.Range(min, max);
         yield return new WaitForSeconds(randomNumber);
-        restrictMovement = 0;
+        print("return ");
+        restrictMovement = true;
     }
-    
+
+    public void decidedTarget()
+    {
+        StartCoroutine(decidedTargetTimer());
+    }
+
+    IEnumerator decidedTargetTimer()
+    {
+        restrictTarget = 1;
+        float randomNumber = Random.Range(4, 7);
+        yield return new WaitForSeconds(randomNumber);
+        restrictTarget = 0;
+    }
+
+    GameObject FindSacrifice()
+    {
+        GameObject[] gos;
+        gos = GameObject.FindGameObjectsWithTag("Sacrifice");
+        if (gos.Length == 0)
+        {
+            return null;
+        }
+        else {
+            return gos[0];
+        }
+    }
+
+    GameObject FindItem()
+    {
+        GameObject[] gos;
+        gos = GameObject.FindGameObjectsWithTag("Item");
+        if (gos.Length == 0)
+        {
+            return null;
+        }
+        else {
+            return gos[0];
+        }
+    }
+
+    GameObject FindPlayer()
+    {
+        GameObject[] gos;
+        Transform _transform = GetComponent<Transform>();
+        GameObject closest = null;
+        float distance = Mathf.Infinity;
+        Vector3 position = _transform.position;
+        gos = GameObject.FindGameObjectsWithTag("Player");
+        if (gos.Length == 0)
+        {
+            return null;
+        }
+        else {
+
+            foreach (GameObject go in gos)
+            {
+                if (go.transform.position != position)
+                {
+                    Vector3 diff = go.transform.position - position;
+                    float curDistance = diff.sqrMagnitude;
+                    if (curDistance < distance)
+                    {
+                        closest = go;
+                        distance = curDistance;
+                    }
+                }
+            }
+            return closest;
+        }
+    }
+
 }
