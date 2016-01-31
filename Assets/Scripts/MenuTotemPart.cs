@@ -42,6 +42,6 @@ public class MenuTotemPart : MonoBehaviour {
     
     void OnMouseDown()
     {
-        Application.LoadLevel("Scene01");
+        _menuBase.LoadLevel();
     }
 }

@@ -11,14 +11,10 @@ public class MenuController : MonoBehaviour {
 	// etc.
 	public int _iControllerNumber;
 	private InputControllerManager.KeyMap input;
+    public bool m_isAxisInUse;
 
-	public List<MenuTotemPart> m_MenuTotemParts;
 
-
-	private float m_PreviousAxis;
-	private int m_Current;
-
-	void Awake ()
+    void Awake ()
 	{
 		// then tell the inputcontrollermanager to set its static variables to match
 		// THIS script's _iControllerNumber,
@@ -27,21 +23,41 @@ public class MenuController : MonoBehaviour {
 
 	void Update ()
 	{
-		if (Input.GetKey(input._button01)) {
-			print ("start game");
-			Application.LoadLevel("Scene01");
+        MenuBase menubase = GetComponent<MenuBase>();
+        int menuState = menubase._menuState;
+        if (Input.GetKey(input._button01)) {
+            menubase.LoadLevel();
 		}
+        float vertAxis = Input.GetAxisRaw(input._verticalAxis);
+        if (vertAxis != 0)
+        {
+            if (m_isAxisInUse == false)
+            {
+                // Call your event function here.
+                if (vertAxis > 0)
+                {
+                    if (menuState != 4)
+                    {
+                        menubase._menuState = (menuState + 1);
+                    }
+                }
 
-		if (Input.GetAxisRaw(input._verticalAxis) > 0 && !(m_PreviousAxis > 0)) {
-			m_Current = Math.Min(++m_Current, m_MenuTotemParts.Count - 1);
-		}
+                if (vertAxis < 0)
+                {
+                    if (menuState != 1)
+                    {
+                        menubase._menuState = (menuState - 1);
+                    }
+                }
 
-		if (Input.GetAxisRaw(input._verticalAxis) < 0 && !(m_PreviousAxis < 0)) {
-			m_Current = Math.Max(--m_Current, 0);
-		}
+                m_isAxisInUse = true;
+            }
+        }
+        if (vertAxis == 0)
+        {
+            m_isAxisInUse = false;
 
-		m_MenuTotemParts [m_Current].OnMouseOver ();
-
-		m_PreviousAxis = Input.GetAxisRaw (input._verticalAxis);
+        }
+        
 	}
 }
