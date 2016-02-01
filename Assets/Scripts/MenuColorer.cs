@@ -5,8 +5,11 @@ public class MenuColorer : MonoBehaviour {
     public MenuBase _menuBase;
     public bool noLight;
     public bool fire;
-	// Use this for initialization
-	void Start () {
+    public bool credits;
+    public bool credits2;
+
+    // Use this for initialization
+    void Start () {
 	
 	}
 
@@ -15,14 +18,37 @@ public class MenuColorer : MonoBehaviour {
     {
         SpriteRenderer renderer = GetComponent<SpriteRenderer>();
         int _menuState = _menuBase._menuState;
-        if (_menuState == 0 && fire)
+
+        if (credits)
+        {
+            if (_menuState == -1)
+            {
+                updateColor(ConvertColor(220, 230, 230));
+            }
+            else {
+                updateColor(ConvertColor(255, 255, 255));
+            }
+        }
+
+        if (credits2)
+        {
+            if (_menuState == -1)
+            {
+                updateColor(ConvertColor(255, 255, 255));
+            }
+            else {
+                updateColor(ConvertColor(255, 255, 255, 0));
+            }
+        }
+
+        else if (_menuState <= 0 && fire)
         {
             updateColor(ConvertColor(223, 54, 26));
         }
-        else if (_menuState == 0 && !noLight)
+        else if (_menuState <= 0 && !noLight)
         {
             updateColor(ConvertColor(68, 9, 9));
-        } else if (_menuState == 0 && noLight)
+        } else if (_menuState <= 0 && noLight)
         {
             updateColor(ConvertColor(68, 9, 9, 0));
         }

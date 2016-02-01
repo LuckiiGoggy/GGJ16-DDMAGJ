@@ -54,35 +54,33 @@ public class AIPlayer : Player {
         {
             return;
         }
-
-
-
-        if (GetComponent<Player>().m_IsInGodMode)
-        {
-            if (restrictTarget == 0)
+        else {
+            if (m_IsInGodMode)
             {
-                m_target = FindPlayer();
-                attackPlayer();
-            } else
-            {
-                attackPlayer();
-            }
-        }
-
-
-        else
-        {
-            m_target = FindSacrifice();
-            if (m_target != null)
-            {
-                getSacrifice();
+                if (restrictTarget == 0)
+                {
+                    m_target = FindPlayer();
+                    attackPlayer();
+                }
+                else
+                {
+                    attackPlayer();
+                }
             }
             else
             {
-                m_target = FindItem();
+                m_target = FindSacrifice();
                 if (m_target != null)
                 {
                     getSacrifice();
+                }
+                else
+                {
+                    m_target = FindItem();
+                    if (m_target != null)
+                    {
+                        getSacrifice();
+                    }
                 }
             }
         }
@@ -98,7 +96,7 @@ public class AIPlayer : Player {
             movement.moveTowards(m_target.transform.position.x, m_target.transform.position.y);
             if ((m_target.transform.position - transform.position).magnitude < 1)
             {
-                animator.SetTrigger("Attack");
+                animator.SetTrigger("GodAttack");
                 makeDecision(0, 1);
             }
         }
@@ -211,11 +209,11 @@ public class AIPlayer : Player {
 
     IEnumerator makeDecisionTimer(float min, float max)
     {
-        restrictMovement = false;
+        restrictMovement = true;
         float randomNumber = Random.Range(min, max);
         yield return new WaitForSeconds(randomNumber);
         print("return ");
-        restrictMovement = true;
+        restrictMovement = false;
     }
 
     public void decidedTarget()
@@ -286,6 +284,52 @@ public class AIPlayer : Player {
             }
             return closest;
         }
+    }
+
+    public virtual void AIGodModeOn()
+    {
+        //If already in god mode, don't restart the transformation
+        if (m_IsInGodMode) return;
+
+        m_IsInGodMode = true;
+
+        animator.SetTrigger("IsGod");
+        animator.SetBool("GodWalk", true);
+        animator.SetBool("Walk", false);
+        //Play transformation particles
+        GetComponentInChildren<ParticleSystem>().Play();
+
+        ApplyDebuff(Debuffs.Slow, 0.5f, float.MaxValue);
+
+        //Stun the player while transforming
+        //ApplyDebuff(Debuffs.Stun, 42f, m_TransformationLength);
+        makeDecision(41f, 42f);
+
+        //Prevent spawner from spawning while someone is transforming
+        GameObject.Find("Spawner").GetComponent<Spawner>().Pause(m_TransformationLength);
+
+    }
+    public virtual void AIGodModeOff()
+    {
+        //If not already in god mode, don't turn it off
+        if (!m_IsInGodMode) return;
+
+        m_IsInGodMode = false;
+
+        animator.SetTrigger("Revert");
+
+        animator.SetBool("GodWalk", false);
+        animator.SetBool("Walk", true);
+        //Player transformation particle
+        GetComponentInChildren<ParticleSystem>().Play();
+
+        ApplyDebuff(Debuffs.Slow, 1, 0.1f);
+
+        //Stun the player while transforming
+        ApplyDebuff(Debuffs.Stun, 42f, m_TransformationLength);
+
+        //Prevent spawner from spawning while someone is transforming
+        GameObject.Find("Spawner").GetComponent<Spawner>().Pause(m_TransformationLength);
     }
 
 }
