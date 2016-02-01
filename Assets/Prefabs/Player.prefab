@@ -170,7 +170,7 @@ Transform:
   m_GameObject: {fileID: 165196}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.42284, y: -7.3019953, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_Children:
   - {fileID: 400954}
   - {fileID: 435898}
@@ -370,6 +370,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f59677803cf9c144781f6a3bead9b6e8, type: 3}
   - {fileID: 8300000, guid: 21d20c970c0d4204eb32ae478cb2bf6e, type: 3}
   m_AudioSource: {fileID: 0}
+  m_GameEndLength: 0
   m_IsInvulnerable: 0
   m_IsInGodMode: 0
   m_TransformationLength: 3
@@ -5203,6 +5204,34 @@ Prefab:
       propertyPath: m_DeathSounds.Array.data[3]
       value: 
       objectReference: {fileID: 8300000, guid: 21d20c970c0d4204eb32ae478cb2bf6e, type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalRotation.x
+      value: 0.008726205
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalRotation.w
+      value: 0.9999239
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalRotation.y
+      value: 0.008726205
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalRotation.z
+      value: -0.00007615244
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 165196}

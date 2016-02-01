@@ -13,6 +13,8 @@ public class Meteor : MonoBehaviour
 
     public CircleCollider2D collider;
 
+    public AudioClip m_ExplosionSFX;
+
     void Start()
     {
         Destroy(gameObject, m_deathTimer);
@@ -33,5 +35,6 @@ public class Meteor : MonoBehaviour
     {
         yield return new WaitForSeconds(m_enableColliderAfterTime);
         collider.enabled = true;
+        GetComponent<AudioSource>().PlayOneShot(m_ExplosionSFX);
     }
 }

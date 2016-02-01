@@ -41,8 +41,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ApocalypseCountdown: 0
-  m_MeteorDelayRange: {x: 5, y: 10}
-  m_MeteorDelayTime: 0
+  m_MeteorDelayRange: {x: 2, y: 10}
+  m_MeteorDelayTime: 1
   m_SpawnBoundaries: {x: 0, y: 0, z: 0, w: 0}
   m_Meteor: {fileID: 447168, guid: b63c441447a6b204ea7fdca9b44874cf, type: 2}
 --- !u!212 &21261438
